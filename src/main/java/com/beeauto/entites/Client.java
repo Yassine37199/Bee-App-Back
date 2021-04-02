@@ -46,7 +46,6 @@ public class Client {
 	@Min(value = 1000, message = "codePostal should not be less than 1000")
 	private int codePostal;
 	
-	@NotBlank(message="dateNaissance is mandotory")
 	@Column(name="dateNaissance")
 	private Date dateNaissance;
 	
@@ -54,7 +53,6 @@ public class Client {
 	@Column(name="telephone")
 	private int telephone;
 	
-	@NotBlank(message="dateCreation is mandotory")
 	@Column(name="dateCreation")
 	private Date dateCreation;
 	
