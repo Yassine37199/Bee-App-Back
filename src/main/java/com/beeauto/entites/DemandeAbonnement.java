@@ -9,6 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 @Entity
 public class DemandeAbonnement {
@@ -41,6 +42,7 @@ public class DemandeAbonnement {
 	@Column(name="gouvernorat")
 	private String gouvernorat;
 	
+	@NotNull(message="dateCreation is mandotory")
 	@Column(name="dateCreation")
 	private Date dateCreation;
 	

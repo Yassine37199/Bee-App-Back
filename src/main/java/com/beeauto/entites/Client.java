@@ -10,6 +10,7 @@ import javax.persistence.Id;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 @Entity
 public class Client {
@@ -46,6 +47,7 @@ public class Client {
 	@Min(value = 1000, message = "codePostal should not be less than 1000")
 	private int codePostal;
 	
+	@NotNull(message="dateNaissance is mandotory")
 	@Column(name="dateNaissance")
 	private Date dateNaissance;
 	
@@ -53,6 +55,7 @@ public class Client {
 	@Column(name="telephone")
 	private int telephone;
 	
+	@NotNull(message="dateCreation is mandotory")
 	@Column(name="dateCreation")
 	private Date dateCreation;
 	
