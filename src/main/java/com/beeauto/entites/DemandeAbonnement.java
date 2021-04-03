@@ -4,12 +4,20 @@ import java.sql.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
+import test3.entities.Client;
 
 @Entity
 public class DemandeAbonnement {
@@ -188,6 +196,23 @@ public class DemandeAbonnement {
 				+ ", agenceCreation=" + agenceCreation + ", etat=" + etat + ", telADSL=" + telADSL + ", typeDemande="
 				+ typeDemande + "]";
 	}
+	
+	
+	
+	@ManyToOne(fetch = FetchType.LAZY, optional = false)
+	 @JoinColumn(name = "clientId", nullable = false)
+	 @OnDelete(action = OnDeleteAction.CASCADE)
+	
+	
+	 private Client client;
+	 
+	 public Client getClient() {
+		 return client;
+	 }
+	 
+	 public void setClient (Client client) {
+		 this.client=client;
+	 }
 	
 	
 	
