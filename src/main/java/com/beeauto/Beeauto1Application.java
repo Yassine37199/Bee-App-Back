@@ -8,6 +8,7 @@ public class Beeauto1Application {
 
 	public static void main(String[] args) {
 		SpringApplication.run(Beeauto1Application.class, args);
+		System.out.println("\n HELLO WORLD !");
 	}
 
 }
