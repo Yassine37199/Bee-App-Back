@@ -13,7 +13,7 @@ public class Ticket {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
 
-    private int idTicket;
+    private long idTicket;
     private String statut;
     private String sujet;
     private String type;
@@ -27,7 +27,7 @@ public class Ticket {
     public Ticket() {
     }
 
-    public Ticket(int idTicket,
+    public Ticket(long idTicket,
                   String statut,
                   String sujet,
                   String type,
@@ -57,11 +57,11 @@ public class Ticket {
         this.statutN2 = statutN2;
     }
 
-    public int getIdTicket() {
+    public long getIdTicket() {
         return idTicket;
     }
 
-    public void setIdTicket(int idTicket) {
+    public void setIdTicket(long idTicket) {
         this.idTicket = idTicket;
     }
 

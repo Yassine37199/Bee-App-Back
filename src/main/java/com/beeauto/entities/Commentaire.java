@@ -8,12 +8,13 @@ import javax.persistence.*;
 import java.sql.Date;
 import java.time.LocalDate;
 
+@Entity
 public class Commentaire {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
 
-    private int idCommentaire;
+    private long idCommentaire;
     private String text;
     @Transient
     private Date dateCreation;
@@ -25,7 +26,7 @@ public class Commentaire {
 
 
 
-    public Commentaire(int idCommentaire, String text) {
+    public Commentaire(long idCommentaire, String text) {
         this.idCommentaire = idCommentaire;
         this.text = text;
     }
@@ -35,11 +36,11 @@ public class Commentaire {
     }
 
 
-    public int getIdCommentaire() {
+    public long getIdCommentaire() {
         return idCommentaire;
     }
 
-    public void setIdCommentaire(int idCommentaire) {
+    public void setIdCommentaire(long idCommentaire) {
         this.idCommentaire = idCommentaire;
     }
 
