@@ -1,8 +1,6 @@
 package com.beeauto.entities;
 
 
-import java.sql.Time;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -11,11 +9,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.print.attribute.standard.DateTimeAtCompleted;
+import javax.print.attribute.standard.DateTimeAtCreation;
 import javax.validation.constraints.NotBlank;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
-
-
 
 
 
@@ -38,22 +36,25 @@ public class HistoriqueConnexion {
 	
 	@Column(name = "start time ")
 	@NotBlank(message = "start time is mandatory")
-	private Time startTime;
+	private DateTimeAtCreation startTime;
 	
 
 	@Column(name = "stop time")
 	@NotBlank(message = "stop time is mandatory")
-	private Time stopTime;
+	private DateTimeAtCompleted stopTime;
 	
 	@Column(name = "session time")
 	@NotBlank(message = "session time is mandatory")
-	private Time sessionTime ;
+	private Integer sessionTime ;
 	
 	@Column(name = "tel Adsl ")
 	@NotBlank(message = "tel Adsl is mandatory")
 	private Integer telAdsl;
 
-	public long getIdHistorique() {
+	
+
+
+public long getIdHistorique() {
 		return idHistorique;
 	}
 
@@ -77,27 +78,27 @@ public class HistoriqueConnexion {
 		this.type = type;
 	}
 
-	public Time getStartTime() {
+	public DateTimeAtCreation getStartTime() {
 		return startTime;
 	}
 
-	public void setStartTime(Time startTime) {
+	public void setStartTime(DateTimeAtCreation startTime) {
 		this.startTime = startTime;
 	}
 
-	public Time getStopTime() {
+	public DateTimeAtCompleted getStopTime() {
 		return stopTime;
 	}
 
-	public void setStopTime(Time stopTime) {
+	public void setStopTime(DateTimeAtCompleted stopTime) {
 		this.stopTime = stopTime;
 	}
 
-	public Time getSessionTime() {
+	public Integer getSessionTime() {
 		return sessionTime;
 	}
 
-	public void setSessionTime(Time sessionTime) {
+	public void setSessionTime(Integer sessionTime) {
 		this.sessionTime = sessionTime;
 	}
 
@@ -109,12 +110,13 @@ public class HistoriqueConnexion {
 		this.telAdsl = telAdsl;
 	}
 
-	public HistoriqueConnexion(long idHistorique, @NotBlank(message = "user name is mandatory") String userName,
+	
+public HistoriqueConnexion(long idHistorique, @NotBlank(message = "user name is mandatory") String userName,
 			@NotBlank(message = "type is mandatory") String type,
-			@NotBlank(message = "start time is mandatory") Time startTime,
-			@NotBlank(message = "stop time is mandatory") Time stopTime,
-			@NotBlank(message = "session time is mandatory") Time sessionTime,
-			@NotBlank(message = "tel Adsl is mandatory") Integer telAdsl) {
+			@NotBlank(message = "start time is mandatory") DateTimeAtCreation startTime,
+			@NotBlank(message = "stop time is mandatory") DateTimeAtCompleted stopTime,
+			@NotBlank(message = "session time is mandatory") Integer sessionTime,
+			@NotBlank(message = "tel Adsl is mandatory") Integer telAdsl, ConfigModem config) {
 		super();
 		this.idHistorique = idHistorique;
 		this.userName = userName;
@@ -123,21 +125,23 @@ public class HistoriqueConnexion {
 		this.stopTime = stopTime;
 		this.sessionTime = sessionTime;
 		this.telAdsl = telAdsl;
+		this.config = config;
 	}
+
 
 /**** Many To One ****/
 	
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "idConfig", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
-    private Config config ;
+    private ConfigModem config ;
 	
     
-	public Config getConfig() {
+	public ConfigModem getConfig() {
     	return config;
     }
 	
-    public void setConfig(Config config) {
+    public void setConfig(ConfigModem config) {
     	this.config=config;
     }
     }
