@@ -104,15 +104,15 @@ public class User {
 	}
 	
 	@ManyToOne(fetch = FetchType.LAZY, optional = false)
-	@JoinColumn(name = "role_id", nullable = false)
+	@JoinColumn(name = "roleId", nullable = false)
 	@OnDelete(action = OnDeleteAction.CASCADE)
-private User user;
+private Role role;
 	
-	public User getUser() {
-		return user;
+	public Role get() {
+		return role;
 	}
-	public void setUser (User user) {
-		this.user=user;
+	public void setRole (Role role) {
+		this.role=role;
 	}
 	
 }

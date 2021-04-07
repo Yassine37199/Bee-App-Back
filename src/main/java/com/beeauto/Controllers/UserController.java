@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.beeauto.Entities.User;
 import com.beeauto.Exception.ResourceNotFoundException;
+import com.beeauto.Repository.RoleRepository;
 import com.beeauto.Repository.UserRepository;
 
 
@@ -24,6 +25,7 @@ import com.beeauto.Repository.UserRepository;
 public class UserController {
 	@Autowired
 	private UserRepository userRepository;
+	private RoleRepository roleRepository;
 	
 	@GetMapping("/list")
 	public List<User> getAllUser (){
@@ -31,8 +33,12 @@ public class UserController {
 	}
 	
 	@PostMapping("/add")
-	public User createUser(@Valid @RequestBody User user) {
-		return userRepository.save(user);
+	public User createUser(@PathVariable (value = "roleId") Long roleId , @Valid @RequestBody User user) {
+		return roleRepository.findById(roleId).map(role -> {
+			user.setRole(role);
+			return userRepository.save(user);
+		}).orElseThrow(() -> new ResourceNotFoundException("roleId" + roleId + "not found"));
+		
 	}
 	
 	@PutMapping("/{userId}")

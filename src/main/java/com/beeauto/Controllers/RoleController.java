@@ -35,24 +35,20 @@ public List<Role> getAllRole(){
 	return (List<Role>) roleRepository.findAll();
 }
 
-@PostMapping("/add{userId}")
+@PostMapping("/add")
 public Role createRole(@PathVariable (value = "userId") Long userId, @Valid @RequestBody Role role)
 {
-	return userRepository.findById(userId).map(user -> {
-		role.setUser(user);
+	
 		return roleRepository.save(role);
-	}).orElseThrow(() -> new ResourceNotFoundException("userId" + userId + "not found"));
+	
 }
 
 
 
-@PutMapping("/update/{userId}/{roleId}")
+@PutMapping("/update/{roleId}")
 public Role updateRole(@PathVariable (value = "userId") Long userId,
 		               @PathVariable (value = "roleId") Long roleId,
 		               @Valid @RequestBody Role roleRequest) {
-	if(!userRepository.existsById(userId)) {
-		throw new ResourceNotFoundException("UserId" + userId + " not found");
-	}
 	
 	return roleRepository.findById(roleId).map(role -> {
     role.setId(roleRequest.getId());
