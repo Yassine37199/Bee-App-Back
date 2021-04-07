@@ -1,0 +1,118 @@
+package com.beeauto.Entities;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
+@Entity
+public class User {
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private long id;
+	
+	@Column(name = "nom")
+	private String nom;
+	
+	@Column(name = "prenom")
+	private String prenom;
+	
+	@Column(name = "motdepasse")
+	private String password;
+	
+	@Column(name = "email")
+	private String email;
+	
+	@Column(name = "tel")
+	private int tel;
+	
+	@Column(name = "id_role")
+	private int id_role;
+	
+	@Column(name = "active")
+	private String active;
+
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
+	}
+
+	public String getNom() {
+		return nom;
+	}
+
+	public void setNom(String nom) {
+		this.nom = nom;
+	}
+
+	public String getPrenom() {
+		return prenom;
+	}
+
+	public void setPrenom(String prenom) {
+		this.prenom = prenom;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public int getTel() {
+		return tel;
+	}
+
+	public void setTel(int tel) {
+		this.tel = tel;
+	}
+
+	public int getId_role() {
+		return id_role;
+	}
+
+	public void setId_role(int id_role) {
+		this.id_role = id_role;
+	}
+
+	public String getActive() {
+		return active;
+	}
+
+	public void setActive(String active) {
+		this.active = active;
+	}
+	
+	@ManyToOne(fetch = FetchType.LAZY, optional = false)
+	@JoinColumn(name = "role_id", nullable = false)
+	@OnDelete(action = OnDeleteAction.CASCADE)
+private User user;
+	
+	public User getUser() {
+		return user;
+	}
+	public void setUser (User user) {
+		this.user=user;
+	}
+	
+}
