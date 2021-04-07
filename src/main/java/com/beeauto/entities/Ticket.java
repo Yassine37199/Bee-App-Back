@@ -1,5 +1,9 @@
 package com.beeauto.entities;
 
+import com.beeauto.entites.DemandeAbonnement;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 import javax.persistence.*;
 import java.sql.Date;
 import java.time.LocalDate;
@@ -116,4 +120,18 @@ public class Ticket {
     public void setStatutN2(String statutN2) {
         this.statutN2 = statutN2;
     }
+
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "idDemandeAbonnement", nullable = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    private DemandeAbonnement demande;
+
+    public DemandeAbonnement getDemande() {
+        return demande;
+    }
+
+    public void setDemande(DemandeAbonnement demande) {
+        this.demande = demande;
+    }
+
 }
