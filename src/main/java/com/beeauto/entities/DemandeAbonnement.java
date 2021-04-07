@@ -1,4 +1,4 @@
-package com.beeauto.entites;
+package com.beeauto.entities;
 
 import java.sql.Date;
 
@@ -17,7 +17,7 @@ import javax.validation.constraints.NotNull;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
-import test3.entities.Client;
+
 
 @Entity
 public class DemandeAbonnement {
