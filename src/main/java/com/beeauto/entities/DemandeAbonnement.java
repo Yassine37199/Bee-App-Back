@@ -1,4 +1,4 @@
-package com.beeauto.entites;
+package com.beeauto.entities;
 
 import java.sql.Date;
 
@@ -13,11 +13,10 @@ import javax.persistence.ManyToOne;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
+import org.hibernate.annotations.Tables;
 
-import test3.entities.Client;
 
 @Entity
 public class DemandeAbonnement {
@@ -200,8 +199,9 @@ public class DemandeAbonnement {
 	
 	
 	@ManyToOne(fetch = FetchType.LAZY, optional = false)
-	 @JoinColumn(name = "clientId", nullable = false)
+	 @JoinColumn(name = "idClient", nullable = false)
 	 @OnDelete(action = OnDeleteAction.CASCADE)
+	
 	
 	
 	 private Client client;

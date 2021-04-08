@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.beeauto.entites.Client;
-import com.beeauto.entites.ReclamationTT;
+import com.beeauto.entities.Client;
+import com.beeauto.entities.ReclamationTT;
 import com.beeauto.exceptions.ResourceNotFoundException;
 import com.beeauto.repositories.ReclamationTTRepository;
 
@@ -44,10 +44,12 @@ public class ReclamationTTController {
 	
 	
 	
-	@PostMapping("/add")
+	@PostMapping("/add/abonnementId")
 	public ReclamationTT addRecTT(@Valid @RequestBody ReclamationTT reclamation) {
 		
+		
 		return recTT.save(reclamation);
+		
 		
 		
 	}

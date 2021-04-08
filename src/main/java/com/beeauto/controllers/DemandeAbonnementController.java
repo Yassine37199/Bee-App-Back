@@ -12,8 +12,10 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import com.beeauto.entites.DemandeAbonnement;
+
+import com.beeauto.entities.DemandeAbonnement;
 import com.beeauto.exceptions.ResourceNotFoundException;
+import com.beeauto.repositories.ClientRepository;
 import com.beeauto.repositories.DemandeAbonnementRepository;
 
 @RestController
@@ -22,12 +24,13 @@ public class DemandeAbonnementController {
 
 	
 	private final DemandeAbonnementRepository demandeRepo;
-	
+	private final ClientRepository clientRepo;
 	
 	@Autowired
-	public DemandeAbonnementController (DemandeAbonnementRepository demandeRepo) {
+	public DemandeAbonnementController (DemandeAbonnementRepository demandeRepo,ClientRepository clientRepo) {
 		
 		this.demandeRepo=demandeRepo;
+		this.clientRepo=clientRepo;
 		
 	}
 	
@@ -40,17 +43,28 @@ public class DemandeAbonnementController {
 	}
 	
 	
-	@PostMapping("/add")
-	public DemandeAbonnement addDemande(@Valid @RequestBody DemandeAbonnement demande) {
+	@PostMapping("/add/{clientId}")
+	public DemandeAbonnement addDemande(@PathVariable (value ="clientId")Long clientId, @Valid @RequestBody DemandeAbonnement demande) {
 		
-		return demandeRepo.save(demande);
+		return clientRepo.findById(clientId).map(client ->
+		{ 
+			demande.setClient(client);
+			return demandeRepo.save(demande);
+			}).orElseThrow(() -> new ResourceNotFoundException("clientId "+ clientId + " not found"));
+
+		
 		
 	}
 	
 	
-	@PutMapping("/update/{id}")
-	public DemandeAbonnement updateClient(@PathVariable("id") long id, @Valid @RequestBody DemandeAbonnement demandeRequest) {
-		return demandeRepo.findById(id).map(demande -> {
+	
+	@PutMapping("/update/{clientId}/{idDemandeAbonnement}")
+	public DemandeAbonnement updateClient(@PathVariable(value="clientId") Long clientId, @PathVariable (value="idDemandeAbonnement") Long demandeId, @Valid @RequestBody DemandeAbonnement demandeRequest) {
+		
+		if(!clientRepo.existsById(clientId)) {
+			throw new ResourceNotFoundException("clientId "+clientId +" not found");
+		}
+		return demandeRepo.findById(demandeId).map(demande -> {
 			demande.setOffre(demandeRequest.getOffre());
 			demande.setDebit(demandeRequest.getDebit());
 			demande.setFrequencePaiement(demandeRequest.getFrequencePaiement());
@@ -63,7 +77,7 @@ public class DemandeAbonnementController {
 			demande.setTelADSL(demandeRequest.getTelADSL());
 			demande.setTypeDemande(demandeRequest.getTypeDemande());
 			return demandeRepo.save(demande);
-		}).orElseThrow(() -> new ResourceNotFoundException("DemandeID "+id+" not found"));
+		}).orElseThrow(() -> new ResourceNotFoundException("DemandeID "+demandeId+" not found"));
 		}
 	
 }
