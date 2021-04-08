@@ -1,6 +1,7 @@
 package com.beeauto.entities;
 
 import com.beeauto.entites.DemandeAbonnement;
+import com.sun.istack.Nullable;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
@@ -122,8 +123,9 @@ public class Ticket {
     }
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "idDemandeAbonnement", nullable = false)
+    @JoinColumn(name = "idDemandeAbonnement", nullable = true)
     @OnDelete(action = OnDeleteAction.CASCADE)
+    @Nullable
     private DemandeAbonnement demande;
 
     public DemandeAbonnement getDemande() {
