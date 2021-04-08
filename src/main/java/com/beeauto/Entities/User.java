@@ -8,9 +8,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.validation.constraints.NotBlank;
 
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
+import org.hibernate.validator.constraints.Length;
 
 @Entity
 public class User {
@@ -18,24 +20,33 @@ public class User {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
 	
+	@NotBlank(message="Ce champ est obligatoire")
 	@Column(name = "nom")
 	private String nom;
 	
+	@NotBlank(message="Ce champ est obligatoire")
 	@Column(name = "prenom")
 	private String prenom;
 	
+	@NotBlank(message="Ce champ est obligatoire")
 	@Column(name = "motdepasse")
 	private String password;
 	
+	@NotBlank(message="Ce champ est obligatoire")
 	@Column(name = "email")
 	private String email;
 	
+	@NotBlank(message="Ce champ est obligatoire")
 	@Column(name = "tel")
+	@Length(min= 8, message = "Taper 8 chiffres")
 	private int tel;
 	
+	@NotBlank(message="Ce champ est obligatoire")
 	@Column(name = "id_role")
 	private int id_role;
 	
+	
+	@NotBlank(message="Ce champ est obligatoire")
 	@Column(name = "active")
 	private String active;
 
