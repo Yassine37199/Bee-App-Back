@@ -17,7 +17,7 @@ import javax.validation.constraints.NotNull;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
-import test3.entities.Client;
+import com.beeauto.entites.Client;
 
 @Entity
 public class DemandeAbonnement {
@@ -199,7 +199,7 @@ public class DemandeAbonnement {
 	
 	
 	
-	@ManyToOne(fetch = FetchType.LAZY, optional = false)
+	 @ManyToOne(fetch = FetchType.LAZY, optional = false)
 	 @JoinColumn(name = "clientId", nullable = false)
 	 @OnDelete(action = OnDeleteAction.CASCADE)
 	

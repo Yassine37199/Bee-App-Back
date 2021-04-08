@@ -1,5 +1,8 @@
 package com.beeauto.entities;
 
+import com.beeauto.entites.DemandeAbonnement;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import java.sql.Date;
@@ -10,7 +13,8 @@ public class Remarque {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int idRemarque;
+
+    private long idRemarque;
     private String text;
     @Transient
     private Date dateCreation;
@@ -18,7 +22,7 @@ public class Remarque {
     public Remarque() {
     }
 
-    public Remarque(int idRemarque, String text) {
+    public Remarque(long idRemarque, String text) {
         this.idRemarque = idRemarque;
         this.text = text;
     }
@@ -27,11 +31,11 @@ public class Remarque {
         this.text = text;
     }
 
-    public int getIdRemarque() {
+    public long getIdRemarque() {
         return idRemarque;
     }
 
-    public void setIdRemarque(int idRemarque) {
+    public void setIdRemarque(long idRemarque) {
         this.idRemarque = idRemarque;
     }
 
@@ -50,4 +54,21 @@ public class Remarque {
     public void setDateCreation(Date dateCreation) {
         this.dateCreation = dateCreation;
     }
+
+
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "idDemandeAbonnement", nullable = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    private DemandeAbonnement demande;
+
+    public DemandeAbonnement getDemande() {
+        return demande;
+    }
+
+    public void setDemande(DemandeAbonnement demande) {
+        this.demande = demande;
+    }
+
+
+
 }
