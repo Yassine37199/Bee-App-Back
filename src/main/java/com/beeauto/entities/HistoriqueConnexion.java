@@ -11,6 +11,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.print.attribute.standard.DateTimeAtCompleted;
 import javax.print.attribute.standard.DateTimeAtCreation;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
@@ -47,8 +48,7 @@ public class HistoriqueConnexion {
 	@NotBlank(message = "session time is mandatory")
 	private Integer sessionTime ;
 	
-	@Column(name = "tel Adsl ")
-	@NotBlank(message = "tel Adsl is mandatory")
+	@Min(value = 9999999, message = "telADSL should not be less than 9999999")
 	private Integer telAdsl;
 
 	

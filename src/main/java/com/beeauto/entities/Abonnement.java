@@ -97,7 +97,7 @@ public class Abonnement {
 	public void setAgenceLivraison(String agenceLivraison) {
 		this.agenceLivraison = agenceLivraison;
 	}
-
+  
 	public String getLoginAbonnement() {
 		return loginAbonnement;
 	}
