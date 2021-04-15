@@ -17,7 +17,6 @@ import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 import org.hibernate.annotations.Tables;
 
-
 @Entity
 public class DemandeAbonnement {
 
@@ -198,8 +197,9 @@ public class DemandeAbonnement {
 	
 	
 	
-	@ManyToOne(fetch = FetchType.LAZY, optional = false)
-	 @JoinColumn(name = "idClient", nullable = false)
+
+	 @ManyToOne(fetch = FetchType.LAZY, optional = false)
+	 @JoinColumn(name = "clientId", nullable = false)
 	 @OnDelete(action = OnDeleteAction.CASCADE)
 	
 	

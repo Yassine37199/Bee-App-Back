@@ -1,5 +1,9 @@
 package com.beeauto.entities;
 
+import com.beeauto.entites.DemandeAbonnement;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 import javax.persistence.*;
 import java.sql.Date;
 import java.time.LocalDate;
@@ -9,7 +13,7 @@ public class Ticket {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
 
-    private int idTicket;
+    private long idTicket;
     private String statut;
     private String sujet;
     private String type;
@@ -23,7 +27,7 @@ public class Ticket {
     public Ticket() {
     }
 
-    public Ticket(int idTicket,
+    public Ticket(long idTicket,
                   String statut,
                   String sujet,
                   String type,
@@ -53,11 +57,11 @@ public class Ticket {
         this.statutN2 = statutN2;
     }
 
-    public int getIdTicket() {
+    public long getIdTicket() {
         return idTicket;
     }
 
-    public void setIdTicket(int idTicket) {
+    public void setIdTicket(long idTicket) {
         this.idTicket = idTicket;
     }
 
@@ -116,4 +120,18 @@ public class Ticket {
     public void setStatutN2(String statutN2) {
         this.statutN2 = statutN2;
     }
+
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "idDemandeAbonnement", nullable = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    private DemandeAbonnement demande;
+
+    public DemandeAbonnement getDemande() {
+        return demande;
+    }
+
+    public void setDemande(DemandeAbonnement demande) {
+        this.demande = demande;
+    }
+
 }
