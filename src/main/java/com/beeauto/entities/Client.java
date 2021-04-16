@@ -1,4 +1,4 @@
-package com.beeauto.entites;
+package com.beeauto.entities;
 
 import java.sql.Date;
 

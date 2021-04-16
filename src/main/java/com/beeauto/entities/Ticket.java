@@ -1,7 +1,5 @@
-package com.beeauto.entities;
+package com.beeauto.Entities;
 
-import com.beeauto.entites.DemandeAbonnement;
-import com.sun.istack.Nullable;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
@@ -122,18 +120,5 @@ public class Ticket {
         this.statutN2 = statutN2;
     }
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "idDemandeAbonnement", nullable = true)
-    @OnDelete(action = OnDeleteAction.CASCADE)
-    @Nullable
-    private DemandeAbonnement demande;
-
-    public DemandeAbonnement getDemande() {
-        return demande;
-    }
-
-    public void setDemande(DemandeAbonnement demande) {
-        this.demande = demande;
-    }
 
 }

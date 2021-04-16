@@ -1,6 +1,5 @@
-package com.beeauto.entities;
+package com.beeauto.Entities;
 
-import com.beeauto.entites.DemandeAbonnement;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
@@ -53,20 +52,6 @@ public class Remarque {
 
     public void setDateCreation(Date dateCreation) {
         this.dateCreation = dateCreation;
-    }
-
-
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "idDemandeAbonnement", nullable = false)
-    @OnDelete(action = OnDeleteAction.CASCADE)
-    private DemandeAbonnement demande;
-
-    public DemandeAbonnement getDemande() {
-        return demande;
-    }
-
-    public void setDemande(DemandeAbonnement demande) {
-        this.demande = demande;
     }
 
 

@@ -1,4 +1,4 @@
-package com.beeauto.entities;
+package com.beeauto.Entities;
 
 import com.sun.istack.Nullable;
 import org.hibernate.annotations.OnDelete;
