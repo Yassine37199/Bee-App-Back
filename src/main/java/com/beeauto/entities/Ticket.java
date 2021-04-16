@@ -1,4 +1,4 @@
-package com.beeauto.Entities;
+package com.beeauto.entities;
 
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;

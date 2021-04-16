@@ -1,6 +1,6 @@
 package com.beeauto.repositories;
 
-import com.beeauto.Entities.Commentaire;
+import com.beeauto.entities.Commentaire;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
