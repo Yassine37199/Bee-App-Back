@@ -188,6 +188,8 @@ public class DemandeAbonnement {
 				+ ", agenceCreation=" + agenceCreation + ", etat=" + etat + ", telADSL=" + telADSL + ", typeDemande="
 				+ typeDemande + "]";
 	}
+
+
 	
 	
 

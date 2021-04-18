@@ -48,7 +48,7 @@ public class DemandeAbonnementController {
 		
 		return clientRepo.findById(clientId).map(client ->
 		{ 
-			demande.setClient(client);
+			/*demande.setClient(client);*/
 			return demandeRepo.save(demande);
 			}).orElseThrow(() -> new ResourceNotFoundException("clientId "+ clientId + " not found"));
 
