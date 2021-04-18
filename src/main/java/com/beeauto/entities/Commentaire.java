@@ -62,6 +62,9 @@ public class Commentaire {
         this.dateCreation = dateCreation;
     }
 
+
+    // Relation with Ticket
+
     @ManyToOne(fetch = FetchType.LAZY , optional = false)
     @JoinColumn(name = "idTicket" , nullable = true)
     @OnDelete(action = OnDeleteAction.CASCADE)
@@ -74,5 +77,22 @@ public class Commentaire {
 
     public void setTicket(Ticket ticket) {
         this.ticket = ticket;
+    }
+
+
+    // Relation with User
+
+    @ManyToOne(fetch = FetchType.LAZY , optional = false)
+    @JoinColumn(name = "idUser" , nullable = true)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    @Nullable
+    private User user;
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }
