@@ -10,7 +10,7 @@ import javax.persistence.Id;
 public class Agence {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private long id;
+	private long idAgence;
 	
 	@Column(name = "type" )
 	private String type;

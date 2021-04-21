@@ -24,14 +24,6 @@ public class DemandeAbonnement {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long idDemandeAbonnement;
 	
-	@NotBlank(message="offre is mandotory")
-	@Column(name="offre")
-	private String offre;
-	
-	@NotBlank(message="debit is mandotory")
-	@Column(name="debit")
-	private String debit;
-	
 	@NotBlank(message="frequencePaiement is mandotory")
 	@Column(name="frequencePaiement")
 	private String frequencePaiement;
@@ -52,9 +44,6 @@ public class DemandeAbonnement {
 	@Column(name="dateCreation")
 	private Date dateCreation;
 	
-	@NotBlank(message="agenceCreation is mandotory")
-	@Column(name="agenceCreation")
-	private String agenceCreation;
 	
 	@NotBlank(message="etat is mandotory")
 	@Column(name="etat")
@@ -71,20 +60,17 @@ public class DemandeAbonnement {
 	
 	public DemandeAbonnement() {};
 
-	public DemandeAbonnement(long idDemandeAbonnement,String offre,String debit,
+	public DemandeAbonnement(long idDemandeAbonnement,
 								String frequencePaiement,String adresseInstallation,String ville,
-								String gouvernorat, Date dateCreation,String agenceCreation,
+								String gouvernorat, Date dateCreation,
 								String etat,int telADSL,String typeDemande) {
 		
 		this.idDemandeAbonnement = idDemandeAbonnement;
-		this.offre = offre;
-		this.debit = debit;
 		this.frequencePaiement = frequencePaiement;
 		this.adresseInstallation = adresseInstallation;
 		this.ville = ville;
 		this.gouvernorat = gouvernorat;
 		this.dateCreation = dateCreation;
-		this.agenceCreation = agenceCreation;
 		this.etat = etat;
 		this.telADSL = telADSL;
 		this.typeDemande = typeDemande;
@@ -98,21 +84,6 @@ public class DemandeAbonnement {
 		this.idDemandeAbonnement = idDemandeAbonnement;
 	}
 
-	public String getOffre() {
-		return offre;
-	}
-
-	public void setOffre(String offre) {
-		this.offre = offre;
-	}
-
-	public String getDebit() {
-		return debit;
-	}
-
-	public void setDebit(String debit) {
-		this.debit = debit;
-	}
 
 	public String getFrequencePaiement() {
 		return frequencePaiement;
@@ -154,13 +125,6 @@ public class DemandeAbonnement {
 		this.dateCreation = dateCreation;
 	}
 
-	public String getAgenceCreation() {
-		return agenceCreation;
-	}
-
-	public void setAgenceCreation(String agenceCreation) {
-		this.agenceCreation = agenceCreation;
-	}
 
 	public String getEtat() {
 		return etat;
@@ -188,18 +152,18 @@ public class DemandeAbonnement {
 
 	@Override
 	public String toString() {
-		return "DemandeAbonnement [idDemandeAbonnement=" + idDemandeAbonnement + ", offre=" + offre + ", debit=" + debit
-				+ ", frequencePaiement=" + frequencePaiement + ", adresseInstallation=" + adresseInstallation
+		return "DemandeAbonnement [idDemandeAbonnement=" + idDemandeAbonnement +
+				", frequencePaiement=" + frequencePaiement + ", adresseInstallation=" + adresseInstallation
 				+ ", ville=" + ville + ", gouvernorat=" + gouvernorat + ", dateCreation=" + dateCreation
-				+ ", agenceCreation=" + agenceCreation + ", etat=" + etat + ", telADSL=" + telADSL + ", typeDemande="
+				+", etat=" + etat + ", telADSL=" + telADSL + ", typeDemande="
 				+ typeDemande + "]";
 	}
 	
 	
 	
-
+//Client-Demande 
 	 @ManyToOne(fetch = FetchType.LAZY, optional = false)
-	 @JoinColumn(name = "clientId", nullable = false)
+	 @JoinColumn(name = "idClient", nullable = false)
 	 @OnDelete(action = OnDeleteAction.CASCADE)
 	
 	
@@ -215,6 +179,38 @@ public class DemandeAbonnement {
 	 }
 	
 	
+//Offre-Demande
+	 @ManyToOne(fetch = FetchType.LAZY, optional = false)
+	 @JoinColumn(name = "idOffre", nullable = false)
+	 @OnDelete(action = OnDeleteAction.CASCADE)
 	
+	
+	
+	 private Offre offre;
+	 
+	 public Offre getOffre() {
+		 return offre;
+	 }
+	 
+	 public void setOffre (Offre offre) {
+		 this.offre=offre;
+	 }
+	 
+//Agence-Demande
+		 @ManyToOne(fetch = FetchType.LAZY, optional = false)
+		 @JoinColumn(name = "idAgence", nullable = false)
+		 @OnDelete(action = OnDeleteAction.CASCADE)
+		
+		
+		
+		 private Agence agence;
+		 
+		 public Agence getAgence() {
+			 return agence;
+		 }
+		 
+		 public void setAgence (Agence agence) {
+			 this.agence=agence;
+		 }	 
 	
 }
