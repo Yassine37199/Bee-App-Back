@@ -13,9 +13,9 @@ import javax.persistence.ManyToOne;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
-import org.hibernate.annotations.Tables;
 
 @Entity
 public class DemandeAbonnement {
@@ -177,6 +177,7 @@ public class DemandeAbonnement {
 	 public void setClient (Client client) {
 		 this.client=client;
 	 }
+
 	
 	
 //Offre-Demande

@@ -1,7 +1,7 @@
 package com.beeauto.repositories;
 
 import com.beeauto.entities.Ticket;
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface TicketRepository extends CrudRepository<Ticket , Long> {
+public interface TicketRepository extends JpaRepository<Ticket , Long> {
 }
