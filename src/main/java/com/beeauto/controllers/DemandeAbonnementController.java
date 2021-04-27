@@ -43,16 +43,12 @@ public class DemandeAbonnementController {
 	}
 	
 	
-	@PostMapping("/add/{clientId}")
-	public DemandeAbonnement addDemande(@PathVariable (value ="clientId")Long clientId, @Valid @RequestBody DemandeAbonnement demande) {
-		
-		return clientRepo.findById(clientId).map(client ->
-		{ 
-			// demande.setClient(client);
-			return demandeRepo.save(demande);
-			}).orElseThrow(() -> new ResourceNotFoundException("clientId "+ clientId + " not found"));
+	@PostMapping("/add")
+	public DemandeAbonnement addDemande( @Valid @RequestBody DemandeAbonnement demande) {
 
-		
+			return demandeRepo.save(demande);
+
+
 		
 	}
 	
@@ -65,14 +61,11 @@ public class DemandeAbonnementController {
 			throw new ResourceNotFoundException("clientId "+clientId +" not found");
 		}
 		return demandeRepo.findById(demandeId).map(demande -> {
-			demande.setOffre(demandeRequest.getOffre());
-			demande.setDebit(demandeRequest.getDebit());
 			demande.setFrequencePaiement(demandeRequest.getFrequencePaiement());
 			demande.setAdresseInstallation(demandeRequest.getAdresseInstallation());
 			demande.setVille(demandeRequest.getVille());
 			demande.setGouvernorat(demandeRequest.getGouvernorat());
 			demande.setDateCreation(demandeRequest.getDateCreation());
-			demande.setAgenceCreation(demandeRequest.getAgenceCreation());
 			demande.setEtat(demandeRequest.getEtat());
 			demande.setTelADSL(demandeRequest.getTelADSL());
 			demande.setTypeDemande(demandeRequest.getTypeDemande());
