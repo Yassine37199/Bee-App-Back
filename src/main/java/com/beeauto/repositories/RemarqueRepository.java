@@ -1,7 +1,7 @@
 package com.beeauto.repositories;
 
 import com.beeauto.entities.Remarque;
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface RemarqueRepository extends CrudRepository<Remarque , Long> {
+public interface RemarqueRepository extends JpaRepository<Remarque , Long> {
 }

@@ -55,19 +55,5 @@ public class Remarque {
     }
 
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "idDemandeAbonnement", nullable = false)
-    @OnDelete(action = OnDeleteAction.CASCADE)
-    private DemandeAbonnement demande;
-
-    public DemandeAbonnement getDemande() {
-        return demande;
-    }
-
-    public void setDemande(DemandeAbonnement demande) {
-        this.demande = demande;
-    }
-
-
 
 }

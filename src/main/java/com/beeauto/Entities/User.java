@@ -16,9 +16,11 @@ import org.hibernate.validator.constraints.Length;
 
 @Entity
 public class User {
+
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private long id;
+	private long idUser;
 	
 	@NotBlank(message="Ce champ est obligatoire")
 	@Column(name = "nom")
@@ -36,12 +38,12 @@ public class User {
 	@Column(name = "email")
 	private String email;
 	
-	@NotBlank(message="Ce champ est obligatoire")
+	//@NotBlank(message="Ce champ est obligatoire")
 	@Column(name = "tel")
-	@Length(min= 8, message = "Taper 8 chiffres")
+	//@Length(min= 8, message = "Taper 8 chiffres")
 	private int tel;
-	
-	@NotBlank(message="Ce champ est obligatoire")
+
+	//@NotBlank(message="Ce champ est obligatoire")
 	@Column(name = "id_role")
 	private int id_role;
 	
@@ -50,12 +52,12 @@ public class User {
 	@Column(name = "active")
 	private String active;
 
-	public long getId() {
-		return id;
+	public long getIdUser() {
+		return idUser;
 	}
 
-	public void setId(long id) {
-		this.id = id;
+	public void setIdUser(long idUser) {
+		this.idUser = idUser;
 	}
 
 	public String getNom() {
@@ -119,7 +121,7 @@ public class User {
 	@OnDelete(action = OnDeleteAction.CASCADE)
 private Role role;
 	
-	public Role get() {
+	public Role getRole() {
 		return role;
 	}
 	public void setRole (Role role) {

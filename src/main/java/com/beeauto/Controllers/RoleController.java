@@ -36,11 +36,9 @@ public List<Role> getAllRole(){
 }
 
 @PostMapping("/add")
-public Role createRole(@PathVariable (value = "userId") Long userId, @Valid @RequestBody Role role)
+public Role createRole( @Valid @RequestBody Role role)
 {
-	
 		return roleRepository.save(role);
-	
 }
 
 

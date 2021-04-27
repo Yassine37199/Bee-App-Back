@@ -1,10 +1,12 @@
 package com.beeauto.entities;
 
+import com.sun.istack.Nullable;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 import org.springframework.data.annotation.Persistent;
 
 import javax.persistence.*;
+import javax.validation.constraints.Null;
 import java.sql.Date;
 import java.time.LocalDate;
 
@@ -60,9 +62,13 @@ public class Commentaire {
         this.dateCreation = dateCreation;
     }
 
+
+    // Relation with Ticket
+
     @ManyToOne(fetch = FetchType.LAZY , optional = false)
-    @JoinColumn(name = "idTicket" , nullable = false)
+    @JoinColumn(name = "idTicket" , nullable = true)
     @OnDelete(action = OnDeleteAction.CASCADE)
+    @Nullable
     private Ticket ticket;
 
     public Ticket getTicket() {
@@ -71,5 +77,22 @@ public class Commentaire {
 
     public void setTicket(Ticket ticket) {
         this.ticket = ticket;
+    }
+
+
+    // Relation with User
+
+    @ManyToOne(fetch = FetchType.LAZY , optional = false)
+    @JoinColumn(name = "idUser" , nullable = true)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    @Nullable
+    private User user;
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }

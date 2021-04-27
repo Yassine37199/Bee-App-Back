@@ -1,5 +1,6 @@
 package com.beeauto.entities;
 
+import com.sun.istack.Nullable;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
@@ -120,17 +121,23 @@ public class Ticket {
         this.statutN2 = statutN2;
     }
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "idDemandeAbonnement", nullable = false)
+
+    // Relation with User
+
+    @ManyToOne(fetch = FetchType.LAZY , optional = false)
+    @JoinColumn(name = "idUser" , nullable = true)
     @OnDelete(action = OnDeleteAction.CASCADE)
-    private DemandeAbonnement demande;
+    @Nullable
+    private User user;
 
-    public DemandeAbonnement getDemande() {
-        return demande;
+    public User getUser() {
+        return user;
     }
 
-    public void setDemande(DemandeAbonnement demande) {
-        this.demande = demande;
+    public void setUser(User user) {
+        this.user = user;
     }
+
+
 
 }
