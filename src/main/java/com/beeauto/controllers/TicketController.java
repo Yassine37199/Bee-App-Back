@@ -1,10 +1,8 @@
 package com.beeauto.controllers;
 
-import com.beeauto.entities.Abonnement;
 import com.beeauto.entities.Ticket;
 import com.beeauto.entities.User;
 import com.beeauto.exceptions.ResourceNotFoundException;
-import com.beeauto.repositories.AbonnementRepository;
 import com.beeauto.repositories.TicketRepository;
 import com.beeauto.repositories.UserRepository;
 import org.springframework.http.HttpStatus;
@@ -18,12 +16,10 @@ import java.util.List;
 public class TicketController {
     private final TicketRepository ticketRepository;
     private final UserRepository userRepository;
-    private final AbonnementRepository abonnementRepository;
 
-    public TicketController(TicketRepository ticketRepository, UserRepository userRepository, AbonnementRepository abonnementRepository) {
+    public TicketController(TicketRepository ticketRepository, UserRepository userRepository) {
         this.ticketRepository = ticketRepository;
         this.userRepository = userRepository;
-        this.abonnementRepository = abonnementRepository;
     }
 
     @GetMapping("/get/all")
@@ -39,15 +35,12 @@ public class TicketController {
         return new ResponseEntity<>(ticket , HttpStatus.OK);
     }
 
-    @PostMapping("/add/{idUser}/{idAbonnement}")
+    @PostMapping("/add/{idUser}")
     public ResponseEntity<Ticket> addTicket(@PathVariable("idUser") long idUser ,
                                             @RequestBody Ticket ticket,
                                             @PathVariable("idAbonnement") long idAbonnement) {
         User user = userRepository.findById(idUser)
                 .orElseThrow(() -> new ResourceNotFoundException("User By id " + idUser + " does not exist"));
-        Abonnement abonnement = abonnementRepository.findById(idAbonnement)
-                .orElseThrow(() -> new ResourceNotFoundException("Abonnement By id " + idAbonnement + " does not exist"));
-
         ticket.setUser(user);
         ticketRepository.save(ticket);
         return new ResponseEntity<>(ticket, HttpStatus.CREATED);
