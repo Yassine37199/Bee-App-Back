@@ -1,9 +1,10 @@
 package com.beeauto.controllers;
 
-import com.beeauto.entities.Commentaire;
 import com.beeauto.entities.Ticket;
+import com.beeauto.entities.User;
 import com.beeauto.exceptions.ResourceNotFoundException;
 import com.beeauto.repositories.TicketRepository;
+import com.beeauto.repositories.UserRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -14,9 +15,11 @@ import java.util.List;
 @RequestMapping("/ticket")
 public class TicketController {
     private final TicketRepository ticketRepository;
+    private final UserRepository userRepository;
 
-    public TicketController(TicketRepository ticketRepository) {
+    public TicketController(TicketRepository ticketRepository, UserRepository userRepository) {
         this.ticketRepository = ticketRepository;
+        this.userRepository = userRepository;
     }
 
     @GetMapping("/get/all")
@@ -32,8 +35,11 @@ public class TicketController {
         return new ResponseEntity<>(ticket , HttpStatus.OK);
     }
 
-    @PostMapping("/add")
-    public ResponseEntity<Ticket> addTicket(@RequestBody Ticket ticket) {
+    @PostMapping("/add/{idUser}")
+    public ResponseEntity<Ticket> addTicket(@PathVariable("idUser") long idUser , @RequestBody Ticket ticket) {
+        User user = userRepository.findById(idUser)
+                .orElseThrow(() -> new ResourceNotFoundException("User By id " + idUser + " does not exist"));
+        ticket.setUser(user);
         ticketRepository.save(ticket);
         return new ResponseEntity<>(ticket, HttpStatus.CREATED);
     }
@@ -45,4 +51,5 @@ public class TicketController {
         ticketRepository.save(ticket);
         return new ResponseEntity<>(ticket , HttpStatus.OK);
     }
+
 }

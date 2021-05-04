@@ -27,13 +27,17 @@ public class UserController {
 	@Autowired
 	private UserRepository userRepository;
 	private RoleRepository roleRepository;
-	
+
+	public UserController(RoleRepository roleRepository) {
+		this.roleRepository = roleRepository;
+	}
+
 	@GetMapping("/list")
 	public List<User> getAllUser (){
 		return (List<User>) userRepository.findAll();
 	}
 	
-	@PostMapping("/add")
+	@PostMapping("/add/{roleId}")
 	public User createUser(@PathVariable (value = "roleId") Long roleId , @Valid @RequestBody User user) {
 		return roleRepository.findById(roleId).map(role -> {
 			user.setRole(role);
