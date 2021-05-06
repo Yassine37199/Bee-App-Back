@@ -1,5 +1,6 @@
 package com.beeauto.entities;
 
+import com.sun.istack.Nullable;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
@@ -54,6 +55,59 @@ public class Remarque {
         this.dateCreation = dateCreation;
     }
 
+    // Relation Remarque / User
+    @ManyToOne(fetch = FetchType.LAZY , optional = false)
+    @JoinColumn(name = "idUser" , nullable = true)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    @Nullable
+    private User user;
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+
+    // Relation Remarque / Abonnement
+    @ManyToOne(fetch = FetchType.LAZY , optional = false)
+    @JoinColumn(name = "idAbonnement" , nullable = true)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    @Nullable
+    private Abonnement abonnement;
+
+    public Abonnement getAbonnement() {
+        return abonnement;
+    }
+
+    public void setAbonnement(Abonnement abonnement) {
+        this.abonnement = abonnement;
+    }
+
+
+    // Relation Remarque / DemandeAbonnement
+    @ManyToOne(fetch = FetchType.LAZY , optional = false)
+    @JoinColumn(name = "idDemandeAbonnement" , nullable = true)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    @Nullable
+    private DemandeAbonnement demandeAbonnement;
+
+    public DemandeAbonnement getDemandeAbonnement() {
+        return demandeAbonnement;
+    }
+
+    public void setDemandeAbonnement(DemandeAbonnement demandeAbonnement) {
+        this.demandeAbonnement = demandeAbonnement;
+    }
+
+
+
 
 
 }
+
+
+
+
