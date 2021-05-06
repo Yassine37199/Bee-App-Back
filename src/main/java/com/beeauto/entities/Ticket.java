@@ -122,7 +122,7 @@ public class Ticket {
     }
 
 
-    /* Relation Ticket / Abonnement
+    //Relation Ticket / Abonnement
     @ManyToOne(fetch = FetchType.LAZY , optional = false)
     @JoinColumn(name = "idAbonnement" , nullable = true)
     @OnDelete(action = OnDeleteAction.CASCADE)
@@ -136,7 +136,6 @@ public class Ticket {
     public void setAbonnement(Abonnement abonnement) {
         this.abonnement = abonnement;
     }
-    */
 
 
 
