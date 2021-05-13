@@ -38,7 +38,7 @@ class ClientControllerTest {
 
 
     @Test
-    void addClient() {
+    void canAddClient() {
         // given
         Long idClient = 2L;
         Client client = new Client(
