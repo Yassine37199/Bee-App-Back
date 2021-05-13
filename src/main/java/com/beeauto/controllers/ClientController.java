@@ -49,12 +49,6 @@ public class ClientController {
 		
 	@PostMapping("/add")
 	public Client addClient(@Valid @RequestBody Client client ) {
-		Boolean existsCIN = clientRepository
-				.selectExistsCIN(client.getCin());
-		if (existsCIN) {
-			throw new BadRequestException(
-					"CIN " + client.getCin() + " already exists");
-		}
 
 		return clientRepository.save(client);
 			

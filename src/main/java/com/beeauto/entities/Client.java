@@ -65,7 +65,27 @@ public class Client {
 	
 	public Client() {};
 
-	public Client(long idClient,String name,int cin,String email,String ville,String gouvernorat,String adresse,int codePostal,Date dateNaissance,int telephone) {
+	public Client(@NotBlank(message = "name is mandotory") String name,
+				  @Min(value = 9999999, message = "cin should not be less than 9999999") int cin,
+				  @Email(message = "Email should be valid") String email,
+				  @NotBlank(message = "ville is mandotory") String ville,
+				  @NotBlank(message = "gouvernorat is mandotory") String gouvernorat,
+				  @NotBlank(message = "adresse is mandotory") String adresse,
+				  @Min(value = 1000, message = "codePostal should not be less than 1000") int codePostal,
+				  @NotNull(message = "dateNaissance is mandotory") Date dateNaissance,
+				  @Min(value = 9999999, message = "telephone should not be less than 9999999") int telephone) {
+		this.name = name;
+		this.cin = cin;
+		this.email = email;
+		this.ville = ville;
+		this.gouvernorat = gouvernorat;
+		this.adresse = adresse;
+		this.codePostal = codePostal;
+		this.dateNaissance = dateNaissance;
+		this.telephone = telephone;
+	}
+
+	public Client(long idClient, String name, int cin, String email, String ville, String gouvernorat, String adresse, int codePostal, Date dateNaissance, int telephone) {
 	
 		this.idClient = idClient;
 		this.name = name;
