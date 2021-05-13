@@ -1,15 +1,9 @@
 package com.beeauto.entities;
 
 import java.sql.Date;
+import java.time.LocalDate;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -40,8 +34,7 @@ public class DemandeAbonnement {
 	@Column(name="gouvernorat")
 	private String gouvernorat;
 	
-	@NotNull(message="dateCreation is mandotory")
-	@Column(name="dateCreation")
+	@Transient
 	private Date dateCreation;
 	
 	
@@ -62,7 +55,7 @@ public class DemandeAbonnement {
 
 	public DemandeAbonnement(long idDemandeAbonnement,
 								String frequencePaiement,String adresseInstallation,String ville,
-								String gouvernorat, Date dateCreation,
+								String gouvernorat,
 								String etat,int telADSL,String typeDemande) {
 		
 		this.idDemandeAbonnement = idDemandeAbonnement;
@@ -70,7 +63,6 @@ public class DemandeAbonnement {
 		this.adresseInstallation = adresseInstallation;
 		this.ville = ville;
 		this.gouvernorat = gouvernorat;
-		this.dateCreation = dateCreation;
 		this.etat = etat;
 		this.telADSL = telADSL;
 		this.typeDemande = typeDemande;
@@ -118,7 +110,7 @@ public class DemandeAbonnement {
 	}
 
 	public Date getDateCreation() {
-		return dateCreation;
+		return Date.valueOf(LocalDate.now());
 	}
 
 	public void setDateCreation(Date dateCreation) {

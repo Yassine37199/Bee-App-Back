@@ -1,6 +1,10 @@
 package com.beeauto.entities;
 
+import org.springframework.data.annotation.Transient;
+import org.springframework.web.bind.annotation.CrossOrigin;
+
 import java.sql.Date;
+import java.time.LocalDate;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -54,14 +58,14 @@ public class Client {
 	@Min(value = 9999999, message = "telephone should not be less than 9999999")
 	@Column(name="telephone")
 	private int telephone;
-	
-	@NotNull(message="dateCreation is mandotory")
+
+	@Transient
 	@Column(name="dateCreation")
 	private Date dateCreation;
 	
 	public Client() {};
 
-	public Client(long idClient,String name,int cin,String email,String ville,String gouvernorat,String adresse,int codePostal,Date dateNaissance,int telephone,Date dateCreation) {
+	public Client(long idClient,String name,int cin,String email,String ville,String gouvernorat,String adresse,int codePostal,Date dateNaissance,int telephone) {
 	
 		this.idClient = idClient;
 		this.name = name;
@@ -73,7 +77,6 @@ public class Client {
 		this.codePostal = codePostal;
 		this.dateNaissance = dateNaissance;
 		this.telephone = telephone;
-		this.dateCreation = dateCreation;
 	}
 
 	public long getIdClient() {
@@ -157,7 +160,7 @@ public class Client {
 	}
 
 	public Date getDateCreation() {
-		return dateCreation;
+		return Date.valueOf(LocalDate.now());
 	}
 
 	public void setDateCreation(Date dateCreation) {

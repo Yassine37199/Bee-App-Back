@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/remarque/")
 public class RemarqueController {
@@ -44,7 +45,7 @@ public class RemarqueController {
         return new ResponseEntity<>(remarque , HttpStatus.OK);
     }
 
-    @PostMapping("/add/{idAbonnement}/{idUser}")
+    @PostMapping("/addabn/{idAbonnement}/{idUser}")
     public ResponseEntity<Remarque> addRemarqueForAbonnement(@PathVariable("idAbonnement") Long idAbonnement,
                                                   @PathVariable("idUser") Long idUser,
                                                   @RequestBody Remarque remarque) {
@@ -58,7 +59,7 @@ public class RemarqueController {
         return new ResponseEntity<>(remarque, HttpStatus.CREATED);
     }
 
-    @PostMapping("/add/{idDemandeAbonnement}/{idUser}")
+    @PostMapping("/adddem/{idDemandeAbonnement}/{idUser}")
     public ResponseEntity<Remarque> addRemarqueForDemande(@PathVariable("idDemandeAbonnement") Long idDemandeAbonnement,
                                                              @PathVariable("idUser") Long idUser,
                                                              @RequestBody Remarque remarque) {

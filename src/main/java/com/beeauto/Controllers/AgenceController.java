@@ -4,30 +4,36 @@ import java.util.List;
 
 import javax.validation.Valid;
 
+import com.beeauto.entities.Client;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import com.beeauto.entities.Agence;
 import com.beeauto.repositories.AgenceRepository;
 import com.beeauto.Exception.ResourceNotFoundException;
 
+
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping({"/agence"})
 public class AgenceController {
 	@Autowired
 	private AgenceRepository agenceRepository;
-	
+
 		
 	@GetMapping("/list")
 	public List<Agence>getAllAgence(){
 		return (List<Agence>) agenceRepository.findAll();
 		}
+
+	@GetMapping("/{id}")
+	public ResponseEntity<Agence> getOneAgence(@PathVariable("id") Long id){
+		Agence agence = agenceRepository.findById(id)
+				.orElseThrow(() -> new com.beeauto.exceptions.ResourceNotFoundException("Agence By Id " + id + " does not exist"));
+		return new ResponseEntity<>(agence , HttpStatus.OK);
+	}
 	
 	@PostMapping("/add")
 	public Agence createAgence(@Valid@RequestBody Agence agence) {

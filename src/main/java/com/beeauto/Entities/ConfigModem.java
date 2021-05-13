@@ -10,15 +10,16 @@ public class ConfigModem {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long idConfig;
-
+    private String modemSN;
     private String loginConfig;
     private String mdpConfig;
 
     public ConfigModem() {
     }
 
-    public ConfigModem(long idConfig, String loginConfig, String mdpConfig) {
+    public ConfigModem(long idConfig, String loginConfig, String mdpConfig , String modemSN) {
         this.idConfig = idConfig;
+        this.modemSN = modemSN;
         this.loginConfig = loginConfig;
         this.mdpConfig = mdpConfig;
     }
@@ -45,6 +46,14 @@ public class ConfigModem {
 
     public void setMdpConfig(String mdpConfig) {
         this.mdpConfig = mdpConfig;
+    }
+
+    public String getModemSN() {
+        return modemSN;
+    }
+
+    public void setModemSN(String modemSN) {
+        this.modemSN = modemSN;
     }
 
     /***  One To One ***/

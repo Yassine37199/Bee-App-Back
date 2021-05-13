@@ -44,10 +44,12 @@ public class Agence {
 	
 	@Column(name = "details")
 	private String details;
-	
-	
-	public Agence(String type, String code, String intitule, String contact, String utilisateur, int tel,
-			String adresse, String agence_mere, String region, String etat, String details) {
+
+    public Agence() {
+    }
+
+    public Agence(String type, String code, String intitule, String contact, String utilisateur, int tel,
+                  String adresse, String agence_mere, String region, String etat, String details) {
 		super();
 		this.type = type;
 		this.code = code;

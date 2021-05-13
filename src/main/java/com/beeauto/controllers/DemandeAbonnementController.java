@@ -4,20 +4,19 @@ import java.util.List;
 
 import javax.validation.Valid;
 
+import com.beeauto.entities.*;
+import com.beeauto.repositories.OffreRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
-import com.beeauto.entities.DemandeAbonnement;
 import com.beeauto.exceptions.ResourceNotFoundException;
 import com.beeauto.repositories.ClientRepository;
 import com.beeauto.repositories.DemandeAbonnementRepository;
 
+
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/demandeAbonnement")
 public class DemandeAbonnementController {
@@ -25,13 +24,15 @@ public class DemandeAbonnementController {
 	
 	private final DemandeAbonnementRepository demandeRepo;
 	private final ClientRepository clientRepo;
+	private final OffreRepository offreRepository;
 	
 	@Autowired
-	public DemandeAbonnementController (DemandeAbonnementRepository demandeRepo,ClientRepository clientRepo) {
+	public DemandeAbonnementController(DemandeAbonnementRepository demandeRepo, ClientRepository clientRepo, OffreRepository offreRepository) {
 		
 		this.demandeRepo=demandeRepo;
 		this.clientRepo=clientRepo;
-		
+
+		this.offreRepository = offreRepository;
 	}
 	
 	
@@ -41,25 +42,34 @@ public class DemandeAbonnementController {
 		return (List<DemandeAbonnement>)demandeRepo.findAll();
 		
 	}
+
+	@GetMapping("/{id}")
+	public ResponseEntity<DemandeAbonnement> getOneDemande(@PathVariable("id") Long id){
+		DemandeAbonnement demande = demandeRepo.findById(id)
+				.orElseThrow(() -> new ResourceNotFoundException("Demande By Id " + id + " does not exist"));
+		return new ResponseEntity<>(demande , HttpStatus.OK);
+	}
 	
 	
-	@PostMapping("/add")
-	public DemandeAbonnement addDemande( @Valid @RequestBody DemandeAbonnement demande) {
-
-			return demandeRepo.save(demande);
-
-
-		
+	@PostMapping("/add/{idClient}/{idOffre}")
+	public DemandeAbonnement addDemande( @Valid @RequestBody DemandeAbonnement demande,
+										 @PathVariable("idClient") long idClient,
+										 @PathVariable("idOffre") long idOffre) {
+		Client client = clientRepo.findById(idClient)
+				.orElseThrow(() -> new ResourceNotFoundException("Client By id " + idClient + " does not exist"));
+		Offre offre = offreRepository.findById(idOffre)
+				.orElseThrow(() -> new ResourceNotFoundException("Offre By id " + idOffre + " does not exist"));
+        demande.setClient(client);
+        demande.setOffre(offre);
+	    return demandeRepo.save(demande);
 	}
 	
 	
 	
-	@PutMapping("/update/{clientId}/{idDemandeAbonnement}")
-	public DemandeAbonnement updateClient(@PathVariable(value="clientId") Long clientId, @PathVariable (value="idDemandeAbonnement") Long demandeId, @Valid @RequestBody DemandeAbonnement demandeRequest) {
+	@PutMapping("/update/{idDemandeAbonnement}")
+	public DemandeAbonnement updateClient(@PathVariable (value="idDemandeAbonnement") Long demandeId, @Valid @RequestBody DemandeAbonnement demandeRequest) {
 		
-		if(!clientRepo.existsById(clientId)) {
-			throw new ResourceNotFoundException("clientId "+clientId +" not found");
-		}
+
 		return demandeRepo.findById(demandeId).map(demande -> {
 			demande.setFrequencePaiement(demandeRequest.getFrequencePaiement());
 			demande.setAdresseInstallation(demandeRequest.getAdresseInstallation());

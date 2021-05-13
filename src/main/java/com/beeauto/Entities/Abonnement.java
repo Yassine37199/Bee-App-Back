@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.sql.Date;
+import java.time.LocalDate;
 
 @Entity
 public class Abonnement {
@@ -14,12 +15,11 @@ public class Abonnement {
     private long idAbonnement;
 
     private String refTT;
+
+    @Transient
     private Date dateCreation;
     private  String etatTT;
-    private  String ModemSN;
     private  String agenceLivraison;
-    private  String loginAbonnement;
-    private  String mdp;
 
     public Abonnement(long idAbonnement,
                       String refTT,
@@ -33,10 +33,7 @@ public class Abonnement {
         this.refTT = refTT;
         this.dateCreation = dateCreation;
         this.etatTT = etatTT;
-        this.ModemSN = modemSN;
         this.agenceLivraison = agenceLivraison;
-        this.loginAbonnement = loginAbonnement;
-        this.mdp = mdp;
     }
 
     public Abonnement() {
@@ -59,7 +56,7 @@ public class Abonnement {
     }
 
     public Date getDateCreation() {
-        return dateCreation;
+        return Date.valueOf(LocalDate.now());
     }
 
     public void setDateCreation(Date dateCreation) {
@@ -74,14 +71,6 @@ public class Abonnement {
         this.etatTT = etatTT;
     }
 
-    public String getModemSN() {
-        return ModemSN;
-    }
-
-    public void setModemSN(String modemSN) {
-        ModemSN = modemSN;
-    }
-
     public String getAgenceLivraison() {
         return agenceLivraison;
     }
@@ -90,19 +79,4 @@ public class Abonnement {
         this.agenceLivraison = agenceLivraison;
     }
 
-    public String getLoginAbonnement() {
-        return loginAbonnement;
-    }
-
-    public void setLoginAbonnement(String loginAbonnement) {
-        this.loginAbonnement = loginAbonnement;
-    }
-
-    public String getMdp() {
-        return mdp;
-    }
-
-    public void setMdp(String mdp) {
-        this.mdp = mdp;
-    }
 }
