@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/commentaire")
 public class CommentController {
@@ -42,6 +43,12 @@ public class CommentController {
                 .orElseThrow(() -> new ResourceNotFoundException("Comment By Id " + id + " does not exist"));
         return new ResponseEntity<>(comment, HttpStatus.OK);
 
+    }
+
+    @GetMapping("/get/ticket/{idTicket}")
+    public ResponseEntity<List<Commentaire>> getCommentByTicket(@PathVariable("idTicket") long idTicket){
+        List<Commentaire> comments = commentRepository.getCommentByTicket(idTicket);
+        return new ResponseEntity<>(comments , HttpStatus.OK);
     }
 
     @PostMapping("/add/{ticketId}/{idUser}")

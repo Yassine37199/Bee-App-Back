@@ -49,7 +49,6 @@ public class AgenceController {
     		agence.setCode(agenceRequest.getCode());
     		agence.setIntitule(agenceRequest.getIntitule());
     		agence.setContact(agenceRequest.getContact());
-    		agence.setUtilisateur(agenceRequest.getUtilisateur());
     		agence.setTel(agenceRequest.getTel());
     		agence.setAdresse(agenceRequest.getAdresse());
     		agence.setAgence_mere(agenceRequest.getAgence_mere());

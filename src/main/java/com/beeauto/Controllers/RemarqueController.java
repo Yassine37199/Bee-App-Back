@@ -38,6 +38,18 @@ public class RemarqueController {
         return new ResponseEntity<>(remarques , HttpStatus.OK);
     }
 
+    @GetMapping("get/demande/{id_demande}")
+    public ResponseEntity<List<Remarque>> getRemarquesByDemande(@PathVariable("id_demande") long id_demande){
+        List<Remarque> remarques = remarqueRepository.getRemarqueByDemande(id_demande);
+        return new ResponseEntity<>(remarques , HttpStatus.OK);
+    }
+
+    @GetMapping("get/abonnement/{idAbonnement}")
+    public ResponseEntity<List<Remarque>> getRemarquesByAbonnement(@PathVariable("idAbonnement") long idAbonnement){
+        List<Remarque> remarques = remarqueRepository.getRemarqueByAbonnement(idAbonnement);
+        return new ResponseEntity<>(remarques , HttpStatus.OK);
+    }
+
     @GetMapping("get/{id}")
     public ResponseEntity<Remarque> getOneRemarque(@PathVariable("id") Long id){
         Remarque remarque = remarqueRepository.findById(id)
@@ -45,7 +57,7 @@ public class RemarqueController {
         return new ResponseEntity<>(remarque , HttpStatus.OK);
     }
 
-    @PostMapping("/addabn/{idAbonnement}/{idUser}")
+    @PostMapping("/addAbn/{idAbonnement}/{idUser}")
     public ResponseEntity<Remarque> addRemarqueForAbonnement(@PathVariable("idAbonnement") Long idAbonnement,
                                                   @PathVariable("idUser") Long idUser,
                                                   @RequestBody Remarque remarque) {
@@ -59,7 +71,7 @@ public class RemarqueController {
         return new ResponseEntity<>(remarque, HttpStatus.CREATED);
     }
 
-    @PostMapping("/adddem/{idDemandeAbonnement}/{idUser}")
+    @PostMapping("/addDem/{idDemandeAbonnement}/{idUser}")
     public ResponseEntity<Remarque> addRemarqueForDemande(@PathVariable("idDemandeAbonnement") Long idDemandeAbonnement,
                                                              @PathVariable("idUser") Long idUser,
                                                              @RequestBody Remarque remarque) {

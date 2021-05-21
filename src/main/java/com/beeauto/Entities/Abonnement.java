@@ -23,15 +23,14 @@ public class Abonnement {
 
     public Abonnement(long idAbonnement,
                       String refTT,
-                      Date dateCreation,
+
                       String etatTT,
-                      String modemSN,
-                      String agenceLivraison,
-                      String loginAbonnement,
-                      String mdp) {
+
+                      String agenceLivraison
+
+                      ) {
         this.idAbonnement = idAbonnement;
         this.refTT = refTT;
-        this.dateCreation = dateCreation;
         this.etatTT = etatTT;
         this.agenceLivraison = agenceLivraison;
     }

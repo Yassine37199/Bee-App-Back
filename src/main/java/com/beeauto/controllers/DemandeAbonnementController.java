@@ -31,7 +31,6 @@ public class DemandeAbonnementController {
 		
 		this.demandeRepo=demandeRepo;
 		this.clientRepo=clientRepo;
-
 		this.offreRepository = offreRepository;
 	}
 	
