@@ -18,15 +18,15 @@ import com.beeauto.repositories.OffreRepository;
 @RestController
 @RequestMapping("/offre")
 public class OffreController {
-	
-private final OffreRepository offreRepository;
 
-	
+	private final OffreRepository offreRepository;
+
+
 	@Autowired
 	public OffreController (OffreRepository offreRepository) {
 		this.offreRepository=offreRepository;
 	}
-	
+
 
 	@GetMapping("/list")
 	public List<Offre> listOffres() {
@@ -39,13 +39,13 @@ private final OffreRepository offreRepository;
 				.orElseThrow(() -> new ResourceNotFoundException("Offre By Id " + id + " does not exist"));
 		return new ResponseEntity<>(offre , HttpStatus.OK);
 	}
-	
+
 
 	@PostMapping("/add")
 	public Offre addOffre(@Valid @RequestBody Offre offre ) {
 		return offreRepository.save(offre);
 	}
-	
+
 
 	@PutMapping("/update/{id}")
 	public Offre updateOffre(@PathVariable("id") long id, @Valid @RequestBody Offre offreRequest) {
@@ -54,5 +54,5 @@ private final OffreRepository offreRepository;
 			offre.setDebit(offreRequest.getDebit());
 			return offreRepository.save(offre);
 		}).orElseThrow(() -> new ResourceNotFoundException("OffreID "+id+" not found"));
-		}
+	}
 }

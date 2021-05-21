@@ -22,11 +22,11 @@ public class AgenceController {
 	@Autowired
 	private AgenceRepository agenceRepository;
 
-		
+
 	@GetMapping("/list")
 	public List<Agence>getAllAgence(){
 		return (List<Agence>) agenceRepository.findAll();
-		}
+	}
 
 	@GetMapping("/{id}")
 	public ResponseEntity<Agence> getOneAgence(@PathVariable("id") Long id){
@@ -34,31 +34,30 @@ public class AgenceController {
 				.orElseThrow(() -> new com.beeauto.exceptions.ResourceNotFoundException("Agence By Id " + id + " does not exist"));
 		return new ResponseEntity<>(agence , HttpStatus.OK);
 	}
-	
+
 	@PostMapping("/add")
 	public Agence createAgence(@Valid@RequestBody Agence agence) {
 		return agenceRepository.save(agence);
 	}
-	
-    @PutMapping("/update/{agenceId}")
-    public Agence updateAgence (@PathVariable (value = "agenceId") Long
-    agenceId, @Valid @RequestBody Agence agenceRequest) {
-  
-    		return agenceRepository.findById(agenceId).map(agence -> {
-    		agence.setType(agenceRequest.getType());
-    		agence.setCode(agenceRequest.getCode());
-    		agence.setIntitule(agenceRequest.getIntitule());
-    		agence.setContact(agenceRequest.getContact());
-    		agence.setUtilisateur(agenceRequest.getUtilisateur());
-    		agence.setTel(agenceRequest.getTel());
-    		agence.setAdresse(agenceRequest.getAdresse());
-    		agence.setAgence_mere(agenceRequest.getAgence_mere());
-    		agence.setRegion(agenceRequest.getRegion());
-    		agence.setEtat(agenceRequest.getEtat());
-    		agence.setDetails(agenceRequest.getDetails());
-    		return agenceRepository.save(agence);
-    		}).orElseThrow(() -> new ResourceNotFoundException("agenceId" + agenceId + "notfound"));
-    }
+
+	@PutMapping("/update/{agenceId}")
+	public Agence updateAgence (@PathVariable (value = "agenceId") Long
+										agenceId, @Valid @RequestBody Agence agenceRequest) {
+
+		return agenceRepository.findById(agenceId).map(agence -> {
+			agence.setType(agenceRequest.getType());
+			agence.setCode(agenceRequest.getCode());
+			agence.setIntitule(agenceRequest.getIntitule());
+			agence.setContact(agenceRequest.getContact());
+			agence.setTel(agenceRequest.getTel());
+			agence.setAdresse(agenceRequest.getAdresse());
+			agence.setAgence_mere(agenceRequest.getAgence_mere());
+			agence.setRegion(agenceRequest.getRegion());
+			agence.setEtat(agenceRequest.getEtat());
+			agence.setDetails(agenceRequest.getDetails());
+			return agenceRepository.save(agence);
+		}).orElseThrow(() -> new ResourceNotFoundException("agenceId" + agenceId + "notfound"));
+	}
 	
 	
 

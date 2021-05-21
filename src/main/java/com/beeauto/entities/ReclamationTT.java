@@ -1,12 +1,11 @@
 package com.beeauto.entities;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 import java.sql.Date;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -117,12 +116,44 @@ public class ReclamationTT {
 	}
 
 
+	//Relation Reclamation / Abonnement
+	@ManyToOne(fetch = FetchType.LAZY , optional = false)
+	@JoinColumn(name = "idAbonnement" , nullable = true)
+	@OnDelete(action = OnDeleteAction.CASCADE)
+	private Abonnement abonnement;
+
+	public Abonnement getAbonnement() {
+		return abonnement;
+	}
+
+	public void setAbonnement(Abonnement abonnement) {
+		this.abonnement = abonnement;
+	}
+
+
+
+	// Relation Reclamation / User
+	@ManyToOne(fetch = FetchType.LAZY , optional = false)
+	@JoinColumn(name = "idUser" , nullable = true)
+	@OnDelete(action = OnDeleteAction.CASCADE)
+	private User user;
+
+	public User getUser() {
+		return user;
+	}
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+
+
 	@Override
 	public String toString() {
 		return "ReclamationTT [idReclamation=" + idReclamation + ", telADSL=" + telADSL + ", dateReclamation="
 				+ dateReclamation + ", objet=" + objet + ", etat=" + etat + ", dateEtat=" + dateEtat + "]";
 	};
-	
+
+
 	
 	
 	
