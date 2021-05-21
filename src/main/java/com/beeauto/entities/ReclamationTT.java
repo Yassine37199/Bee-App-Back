@@ -1,12 +1,12 @@
 package com.beeauto.entities;
 
-import com.sun.istack.Nullable;
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
-
 import java.sql.Date;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -122,42 +122,6 @@ public class ReclamationTT {
 		return "ReclamationTT [idReclamation=" + idReclamation + ", telADSL=" + telADSL + ", dateReclamation="
 				+ dateReclamation + ", objet=" + objet + ", etat=" + etat + ", dateEtat=" + dateEtat + "]";
 	};
-
-	//Relation Reclamation / Abonnement
-	@ManyToOne(fetch = FetchType.LAZY , optional = false)
-	@JoinColumn(name = "idAbonnement" , nullable = true)
-	@OnDelete(action = OnDeleteAction.CASCADE)
-	@Nullable
-	private Abonnement abonnement;
-
-	public Abonnement getAbonnement() {
-		return abonnement;
-	}
-
-	public void setAbonnement(Abonnement abonnement) {
-		this.abonnement = abonnement;
-	}
-
-
-
-	// Relation Reclamation / User
-	@ManyToOne(fetch = FetchType.LAZY , optional = false)
-	@JoinColumn(name = "idUser" , nullable = true)
-	@OnDelete(action = OnDeleteAction.CASCADE)
-	@Nullable
-	private User user;
-
-	public User getUser() {
-		return user;
-	}
-
-	public void setUser(User user) {
-		this.user = user;
-	}
-
-	
-
-
 	
 	
 	

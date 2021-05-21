@@ -41,6 +41,7 @@ class OffreControllerTest {
     @Test
     void canAddOffre() {
         // given
+
         Offre offre = new Offre(
                 1L,
                 "Offre Bee SMART ADSL",

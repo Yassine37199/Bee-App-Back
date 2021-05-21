@@ -58,6 +58,7 @@ public class UserController {
 					user.setPrenom(userRequest.getPrenom());
 					user.setPassword(userRequest.getPassword());
 					user.setTel(userRequest.getTel());
+					user.setId_role(userRequest.getId_role());
 					user.setActive(userRequest.getActive());
 					user.setRole(role);
 					return userRepository.save(user);

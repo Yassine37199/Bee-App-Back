@@ -1,6 +1,5 @@
 package com.beeauto.repositories;
 
-import com.beeauto.entities.Remarque;
 import com.beeauto.entities.Ticket;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
