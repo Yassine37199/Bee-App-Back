@@ -23,9 +23,7 @@ public class Agence {
 	
 	@Column(name = "contact")
 	private String contact;
-	
-	@Column(name = "utilisateur")
-	private String utilisateur;
+
 	
 	@Column(name = "tel")
 	private int tel;
@@ -48,14 +46,13 @@ public class Agence {
     public Agence() {
     }
 
-    public Agence(String type, String code, String intitule, String contact, String utilisateur, int tel,
+    public Agence(String type, String code, String intitule, String contact, int tel,
                   String adresse, String agence_mere, String region, String etat, String details) {
 		super();
 		this.type = type;
 		this.code = code;
 		this.intitule = intitule;
 		this.contact = contact;
-		this.utilisateur = utilisateur;
 		this.tel = tel;
 		this.adresse = adresse;
 		this.agence_mere = agence_mere;
@@ -86,12 +83,6 @@ public class Agence {
 	}
 	public void setContact(String contact) {
 		this.contact = contact;
-	}
-	public String getUtilisateur() {
-		return utilisateur;
-	}
-	public void setUtilisateur(String utilisateur) {
-		this.utilisateur = utilisateur;
 	}
 	public int getTel() {
 		return tel;

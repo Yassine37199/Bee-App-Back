@@ -21,26 +21,25 @@ import com.beeauto.repositories.DemandeAbonnementRepository;
 @RequestMapping("/demandeAbonnement")
 public class DemandeAbonnementController {
 
-	
+
 	private final DemandeAbonnementRepository demandeRepo;
 	private final ClientRepository clientRepo;
 	private final OffreRepository offreRepository;
-	
+
 	@Autowired
 	public DemandeAbonnementController(DemandeAbonnementRepository demandeRepo, ClientRepository clientRepo, OffreRepository offreRepository) {
-		
+
 		this.demandeRepo=demandeRepo;
 		this.clientRepo=clientRepo;
-
 		this.offreRepository = offreRepository;
 	}
-	
-	
+
+
 	@GetMapping("/list")
 	public List<DemandeAbonnement> listDemandes(){
-		
+
 		return (List<DemandeAbonnement>)demandeRepo.findAll();
-		
+
 	}
 
 	@GetMapping("/{id}")
@@ -49,8 +48,8 @@ public class DemandeAbonnementController {
 				.orElseThrow(() -> new ResourceNotFoundException("Demande By Id " + id + " does not exist"));
 		return new ResponseEntity<>(demande , HttpStatus.OK);
 	}
-	
-	
+
+
 	@PostMapping("/add/{idClient}/{idOffre}")
 	public DemandeAbonnement addDemande( @Valid @RequestBody DemandeAbonnement demande,
 										 @PathVariable("idClient") long idClient,
@@ -59,16 +58,16 @@ public class DemandeAbonnementController {
 				.orElseThrow(() -> new ResourceNotFoundException("Client By id " + idClient + " does not exist"));
 		Offre offre = offreRepository.findById(idOffre)
 				.orElseThrow(() -> new ResourceNotFoundException("Offre By id " + idOffre + " does not exist"));
-        demande.setClient(client);
-        demande.setOffre(offre);
-	    return demandeRepo.save(demande);
+		demande.setClient(client);
+		demande.setOffre(offre);
+		return demandeRepo.save(demande);
 	}
-	
-	
-	
+
+
+
 	@PutMapping("/update/{idDemandeAbonnement}")
 	public DemandeAbonnement updateClient(@PathVariable (value="idDemandeAbonnement") Long demandeId, @Valid @RequestBody DemandeAbonnement demandeRequest) {
-		
+
 
 		return demandeRepo.findById(demandeId).map(demande -> {
 			demande.setFrequencePaiement(demandeRequest.getFrequencePaiement());
@@ -81,6 +80,6 @@ public class DemandeAbonnementController {
 			demande.setTypeDemande(demandeRequest.getTypeDemande());
 			return demandeRepo.save(demande);
 		}).orElseThrow(() -> new ResourceNotFoundException("DemandeID "+demandeId+" not found"));
-		}
+	}
 	
 }

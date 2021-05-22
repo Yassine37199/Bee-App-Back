@@ -5,13 +5,7 @@ import java.util.List;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.beeauto.entities.Role;
 import com.beeauto.entities.User;
@@ -19,6 +13,7 @@ import com.beeauto.Exception.ResourceNotFoundException;
 import com.beeauto.repositories.RoleRepository;
 import com.beeauto.repositories.UserRepository;
 
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping({"/roles"})
 

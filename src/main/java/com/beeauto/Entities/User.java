@@ -43,9 +43,6 @@ public class User {
 	//@Length(min= 8, message = "Taper 8 chiffres")
 	private int tel;
 
-	//@NotBlank(message="Ce champ est obligatoire")
-	@Column(name = "id_role")
-	private int id_role;
 	
 	
 	@NotBlank(message="Ce champ est obligatoire")
@@ -100,13 +97,6 @@ public class User {
 		this.tel = tel;
 	}
 
-	public int getId_role() {
-		return id_role;
-	}
-
-	public void setId_role(int id_role) {
-		this.id_role = id_role;
-	}
 
 	public String getActive() {
 		return active;

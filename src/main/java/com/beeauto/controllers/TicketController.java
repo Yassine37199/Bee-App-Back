@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/ticket")
 public class TicketController {
@@ -35,10 +36,16 @@ public class TicketController {
     }
 
     @GetMapping("/get/{id}")
-    public ResponseEntity<Ticket> getOneTicket(@PathVariable("id") Long id){
+    public ResponseEntity<Ticket> getOneTicket(@PathVariable("id") long id){
         Ticket ticket = ticketRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Ticket By Id " + id + " does not exist"));
         return new ResponseEntity<>(ticket , HttpStatus.OK);
+    }
+
+    @GetMapping("/get/abonnement/{idAbonnement}")
+    public ResponseEntity<List<Ticket>> getTicketsByAbonnement(@PathVariable("idAbonnement") long id ){
+        List<Ticket> tickets = ticketRepository.getTicketByAbonnement(id);
+        return new ResponseEntity<>(tickets , HttpStatus.OK);
     }
 
     @PostMapping("/add/{idUser}/{idAbonnement}")
@@ -50,6 +57,7 @@ public class TicketController {
         Abonnement abonnement = abonnementRepository.findById(idAbonnement)
                 .orElseThrow(() -> new ResourceNotFoundException("Abonnement By id " + idAbonnement + " does not exist"));
         ticket.setUser(user);
+        ticket.setAbonnement(abonnement);
         ticketRepository.save(ticket);
         return new ResponseEntity<>(ticket, HttpStatus.CREATED);
     }
