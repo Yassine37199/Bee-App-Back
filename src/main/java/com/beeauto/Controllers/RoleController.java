@@ -5,6 +5,8 @@ import java.util.List;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import com.beeauto.entities.Role;
@@ -30,6 +32,18 @@ public List<Role> getAllRole(){
 	return (List<Role>) roleRepository.findAll();
 }
 
+@GetMapping("/{roleId}")
+public Role getRole(@PathVariable (value = "roleId") Long roleId){
+		return this.roleRepository.findById(roleId)
+				.orElseThrow(() -> new ResourceNotFoundException("Role By Id " + roleId + " does not exist"));
+	}
+
+	@GetMapping("/nom/{nomrole}")
+	public ResponseEntity<Role> getUserByEmail(@PathVariable("nomrole") String nomrole){
+		Role role =  this.roleRepository.findByNom(nomrole);
+		return new ResponseEntity<Role>(role , HttpStatus.OK);
+	}
+
 @PostMapping("/add")
 public Role createRole( @Valid @RequestBody Role role)
 {
@@ -39,7 +53,7 @@ public Role createRole( @Valid @RequestBody Role role)
 
 
 @PutMapping("/update/{roleId}")
-public Role updateRole(@PathVariable (value = "userId") Long userId,
+public Role updateRole(
 		               @PathVariable (value = "roleId") Long roleId,
 		               @Valid @RequestBody Role roleRequest) {
 	

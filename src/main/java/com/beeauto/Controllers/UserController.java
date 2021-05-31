@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.validation.Valid;
 
+import com.beeauto.entities.DemandeAbonnement;
 import com.beeauto.entities.Ticket;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -33,6 +34,13 @@ public class UserController {
 	@GetMapping("/list")
 	public List<User> getAllUser (){
 		return (List<User>) userRepository.findAll();
+	}
+
+	@GetMapping("/{idUser}")
+	public ResponseEntity<User> getOneUser(@PathVariable("idUser") Long idUser){
+		User user = userRepository.findById(idUser)
+				.orElseThrow(() -> new com.beeauto.exceptions.ResourceNotFoundException("User By Id " + idUser + " does not exist"));
+		return new ResponseEntity<>(user , HttpStatus.OK);
 	}
 
 	@GetMapping("/get/email/{email}")

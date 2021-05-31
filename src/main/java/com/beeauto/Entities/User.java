@@ -43,8 +43,6 @@ public class User {
 	//@Length(min= 8, message = "Taper 8 chiffres")
 	private int tel;
 
-	
-	
 	@NotBlank(message="Ce champ est obligatoire")
 	@Column(name = "active")
 	private String active;

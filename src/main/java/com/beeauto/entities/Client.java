@@ -180,11 +180,11 @@ public class Client {
 	}
 
 	public Date getDateCreation() {
-		return Date.valueOf(LocalDate.now());
+		return dateCreation;
 	}
 
 	public void setDateCreation(Date dateCreation) {
-		this.dateCreation = dateCreation;
+		this.dateCreation = Date.valueOf(LocalDate.now());;
 	}
 
 	@Override
