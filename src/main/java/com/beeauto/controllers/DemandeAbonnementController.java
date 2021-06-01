@@ -5,6 +5,7 @@ import java.util.List;
 import javax.validation.Valid;
 
 import com.beeauto.entities.*;
+import com.beeauto.repositories.AgenceRepository;
 import com.beeauto.repositories.OffreRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -25,13 +26,18 @@ public class DemandeAbonnementController {
 	private final DemandeAbonnementRepository demandeRepo;
 	private final ClientRepository clientRepo;
 	private final OffreRepository offreRepository;
+	private final AgenceRepository agenceRepository;
 
 	@Autowired
-	public DemandeAbonnementController(DemandeAbonnementRepository demandeRepo, ClientRepository clientRepo, OffreRepository offreRepository) {
+	public DemandeAbonnementController(DemandeAbonnementRepository demandeRepo,
+									   ClientRepository clientRepo,
+									   OffreRepository offreRepository,
+									   AgenceRepository agenceRepository) {
 
 		this.demandeRepo=demandeRepo;
 		this.clientRepo=clientRepo;
 		this.offreRepository = offreRepository;
+		this.agenceRepository = agenceRepository;
 	}
 
 
@@ -50,16 +56,20 @@ public class DemandeAbonnementController {
 	}
 
 
-	@PostMapping("/add/{idClient}/{idOffre}")
+	@PostMapping("/add/{idClient}/{idOffre}/{idAgence}")
 	public DemandeAbonnement addDemande( @Valid @RequestBody DemandeAbonnement demande,
 										 @PathVariable("idClient") long idClient,
-										 @PathVariable("idOffre") long idOffre) {
+										 @PathVariable("idOffre") long idOffre,
+										 @PathVariable("idAgence") long idAgence) {
 		Client client = clientRepo.findById(idClient)
 				.orElseThrow(() -> new ResourceNotFoundException("Client By id " + idClient + " does not exist"));
 		Offre offre = offreRepository.findById(idOffre)
 				.orElseThrow(() -> new ResourceNotFoundException("Offre By id " + idOffre + " does not exist"));
+		Agence agence = agenceRepository.findById(idAgence)
+				.orElseThrow(() -> new ResourceNotFoundException("Agence By id " + idAgence + " does not exist"));
 		demande.setClient(client);
 		demande.setOffre(offre);
+		demande.setAgence(agence);
 		return demandeRepo.save(demande);
 	}
 
