@@ -8,6 +8,7 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
@@ -51,22 +52,10 @@ public class DemandeAbonnement {
 	private String typeDemande;
 	
 	
-	public DemandeAbonnement() {};
 
-	public DemandeAbonnement(long idDemandeAbonnement,
-								String frequencePaiement,String adresseInstallation,String ville,
-								String gouvernorat,
-								String etat,int telADSL,String typeDemande) {
-		
-		this.idDemandeAbonnement = idDemandeAbonnement;
-		this.frequencePaiement = frequencePaiement;
-		this.adresseInstallation = adresseInstallation;
-		this.ville = ville;
-		this.gouvernorat = gouvernorat;
-		this.etat = etat;
-		this.telADSL = telADSL;
-		this.typeDemande = typeDemande;
-	}
+
+
+
 
 	public long getIdDemandeAbonnement() {
 		return idDemandeAbonnement;

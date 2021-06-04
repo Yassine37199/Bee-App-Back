@@ -1,6 +1,8 @@
 package com.beeauto.entities;
 
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 import org.springframework.stereotype.Controller;
 
 import javax.persistence.*;
@@ -79,4 +81,20 @@ public class Abonnement {
         this.agenceLivraison = agenceLivraison;
     }
 
+    //Abonnement-Demande
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "idDemandeAbonnement", nullable = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+
+
+
+    private DemandeAbonnement demandeAbonnement;
+
+    public DemandeAbonnement getDemandeAbonnement() {
+        return demandeAbonnement;
+    }
+
+    public void setDemandeAbonnement(DemandeAbonnement demandeAbonnement) {
+        this.demandeAbonnement = demandeAbonnement;
+    }
 }

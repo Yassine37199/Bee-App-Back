@@ -28,6 +28,12 @@ public class AgenceController {
 		return (List<Agence>) agenceRepository.findAll();
 	}
 
+	@GetMapping("/intitule/{intitule}")
+	public ResponseEntity<Agence> getAgenceByIntitule(@PathVariable("intitule") String intitule){
+		Agence agence =  this.agenceRepository.findByIntitule(intitule);
+		return new ResponseEntity<>(agence , HttpStatus.OK);
+	}
+
 	@GetMapping("/{id}")
 	public ResponseEntity<Agence> getOneAgence(@PathVariable("id") Long id){
 		Agence agence = agenceRepository.findById(id)

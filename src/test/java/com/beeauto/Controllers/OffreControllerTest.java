@@ -38,25 +38,5 @@ class OffreControllerTest {
         verify(offreRepository).findAll();
     }
 
-    @Test
-    void canAddOffre() {
-        // given
 
-        Offre offre = new Offre(
-                1L,
-                "Offre Bee SMART ADSL",
-                50
-        );
-
-        underTest.addOffre(offre);
-
-        // then
-        ArgumentCaptor<Offre> offreArgumentCaptor =
-                ArgumentCaptor.forClass(Offre.class);
-
-        verify(offreRepository).save(offreArgumentCaptor.capture());
-
-        Offre capturedOffre = offreArgumentCaptor.getValue();
-        assertThat(capturedOffre).isEqualTo(offre);
-    }
 }

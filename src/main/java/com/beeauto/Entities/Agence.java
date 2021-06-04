@@ -48,7 +48,6 @@ public class Agence {
 
     public Agence(String type, String code, String intitule, String contact, int tel,
                   String adresse, String agence_mere, String region, String etat, String details) {
-		super();
 		this.type = type;
 		this.code = code;
 		this.intitule = intitule;
@@ -120,7 +119,13 @@ public class Agence {
 	public void setDetails(String details) {
 		this.details = details;
 	}
-	
-	
 
+
+	public long getIdAgence() {
+		return idAgence;
+	}
+
+	public void setIdAgence(long idAgence) {
+		this.idAgence = idAgence;
+	}
 }

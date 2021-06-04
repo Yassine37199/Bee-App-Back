@@ -22,17 +22,6 @@ public class Offre {
 	@Min(value = 0, message = "cin should not be more than 0")
 	@Column(name="debit")
 	private int debit;
-	
-	
-	public Offre() {}
-	
-
-
-	public Offre(long idOffre, String labelle,int debit) {
-		this.idOffre = idOffre;
-		this.labelle = labelle;
-		this.debit = debit;
-	}
 
 
 

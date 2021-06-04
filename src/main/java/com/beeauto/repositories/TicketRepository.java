@@ -11,4 +11,11 @@ public interface TicketRepository extends JpaRepository<Ticket , Long> {
     @Query("SELECT t FROM Ticket t " +
             "WHERE t.abonnement.idAbonnement = ?1")
     List<Ticket> getTicketByAbonnement(long idAbonnement);
+
+
+    @Query("SELECT t FROM Ticket t " +
+    "WHERE t.user.idUser = ?1")
+    List<Ticket> getTicketByUser(long idUser);
 }
+
+

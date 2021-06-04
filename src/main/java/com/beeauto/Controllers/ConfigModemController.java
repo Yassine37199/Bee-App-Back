@@ -34,6 +34,13 @@ public class ConfigModemController {
         return (List<ConfigModem>) configModemRepo.findAll();
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<ConfigModem> getOneConfig(@PathVariable("id") long id){
+        ConfigModem configModem = configModemRepo.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Modem By Id " + id + " does not exist"));
+        return new ResponseEntity<>(configModem , HttpStatus.OK);
+    }
+
     @PostMapping("/add/{idAbonnement}")
     public ConfigModem addConfigModem(@Valid @RequestBody ConfigModem configModem,
                                       @PathVariable("idAbonnement") long idAbonnement){

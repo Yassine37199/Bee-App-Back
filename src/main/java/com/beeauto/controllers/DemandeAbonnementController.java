@@ -58,9 +58,9 @@ public class DemandeAbonnementController {
 
 	@PostMapping("/add/{idClient}/{idOffre}/{idAgence}")
 	public DemandeAbonnement addDemande( @Valid @RequestBody DemandeAbonnement demande,
-										 @PathVariable("idClient") long idClient,
-										 @PathVariable("idOffre") long idOffre,
-										 @PathVariable("idAgence") long idAgence) {
+										 @PathVariable("idClient") Long idClient,
+										 @PathVariable("idOffre") Long idOffre,
+										 @PathVariable("idAgence") Long idAgence) {
 		Client client = clientRepo.findById(idClient)
 				.orElseThrow(() -> new ResourceNotFoundException("Client By id " + idClient + " does not exist"));
 		Offre offre = offreRepository.findById(idOffre)

@@ -40,6 +40,12 @@ public class OffreController {
 		return new ResponseEntity<>(offre , HttpStatus.OK);
 	}
 
+	@GetMapping("/labelle/{labelle}")
+	public ResponseEntity<Offre> getOffreByLabelle(@PathVariable("labelle") String labelle){
+		Offre offre =  this.offreRepository.findByLabelle(labelle);
+		return new ResponseEntity<Offre>(offre , HttpStatus.OK);
+	}
+
 
 	@PostMapping("/add")
 	public Offre addOffre(@Valid @RequestBody Offre offre ) {

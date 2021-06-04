@@ -5,6 +5,7 @@ import java.util.List;
 import javax.validation.Valid;
 
 
+import com.beeauto.entities.Role;
 import com.beeauto.exceptions.BadRequestException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -36,6 +37,12 @@ public class ClientController {
 	@GetMapping("/list")
 	public List<Client> listClients() {
 		return (List<Client>)clientRepository.findAll() ;
+	}
+
+	@GetMapping("/cin/{cin}")
+	public ResponseEntity<Client> getClientByCIN(@PathVariable("cin") int cin){
+		Client client =  this.clientRepository.findByCin(cin);
+		return new ResponseEntity<>(client , HttpStatus.OK);
 	}
 
 
