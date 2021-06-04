@@ -3,6 +3,7 @@ package com.beeauto.controllers;
 
 import com.beeauto.entities.Abonnement;
 import com.beeauto.entities.Agence;
+import com.beeauto.entities.Ticket;
 import com.beeauto.entities.User;
 import com.beeauto.exceptions.ResourceNotFoundException;
 import com.beeauto.repositories.AbonnementRepository;
@@ -62,6 +63,14 @@ public class AbonnementController {
             return abonnementRepo.save(abonnement);
         }).orElseThrow(() -> new com.beeauto.Exception.ResourceNotFoundException("Demande" + idDemandeAbonnement + "not found"));
 
+    }
+
+    @PutMapping("/update/{id}")
+    public ResponseEntity<Abonnement> UpdateTicket(@PathVariable("id") Long id ,
+                                               @RequestBody Abonnement abonnement) {
+        abonnement.setIdAbonnement(id);
+        abonnementRepo.save(abonnement);
+        return new ResponseEntity<>(abonnement , HttpStatus.OK);
     }
 
 }
