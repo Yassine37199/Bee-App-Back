@@ -48,6 +48,12 @@ public class UserController {
 		User user =  this.userRepository.findByEmail(email);
 		return new ResponseEntity<User>(user , HttpStatus.OK);
 	}
+
+	@GetMapping("/get/N2")
+	public List<User> getUserN2(){
+		return (List<User>)this.userRepository.findByRole("agent support technique N2");
+
+	}
 	
 	@PostMapping("/add/{roleId}")
 	public User createUser(@PathVariable (value = "roleId") Long roleId , @Valid @RequestBody User user) {

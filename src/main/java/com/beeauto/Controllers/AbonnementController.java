@@ -65,12 +65,16 @@ public class AbonnementController {
 
     }
 
-    @PutMapping("/update/{id}")
-    public ResponseEntity<Abonnement> UpdateTicket(@PathVariable("id") Long id ,
+    @PutMapping("/update/{idDemandeAbonnement}/{idAbonnement}")
+    public Abonnement UpdateTicket(@PathVariable("idDemandeAbonnement") Long idDemandeAbonnement ,
+                                                   @PathVariable("idAbonnement") Long idAbonnement ,
                                                @RequestBody Abonnement abonnement) {
-        abonnement.setIdAbonnement(id);
-        abonnementRepo.save(abonnement);
-        return new ResponseEntity<>(abonnement , HttpStatus.OK);
+
+        return demandeAbonnementRepository.findById(idDemandeAbonnement).map(demande -> {
+            abonnement.setDemandeAbonnement(demande);
+            abonnement.setIdAbonnement(idAbonnement);
+            return abonnementRepo.save(abonnement);
+        }).orElseThrow(() -> new com.beeauto.Exception.ResourceNotFoundException("Demande" + idDemandeAbonnement + "not found"));
     }
 
 }

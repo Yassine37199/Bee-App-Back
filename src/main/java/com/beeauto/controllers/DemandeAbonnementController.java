@@ -75,21 +75,25 @@ public class DemandeAbonnementController {
 
 
 
-	@PutMapping("/update/{idDemandeAbonnement}")
-	public DemandeAbonnement updateClient(@PathVariable (value="idDemandeAbonnement") Long demandeId, @Valid @RequestBody DemandeAbonnement demandeRequest) {
+	@PutMapping("/update/{idDemandeAbonnement}/{idClient}/{idOffre}/{idAgence}")
+	public DemandeAbonnement updateClient(@PathVariable (value="idDemandeAbonnement") Long demandeId,
+										  @PathVariable("idClient") Long idClient,
+										  @PathVariable("idOffre") Long idOffre,
+										  @PathVariable("idAgence") Long idAgence,
+										  @Valid @RequestBody DemandeAbonnement demandeRequest) {
 
 
-		return demandeRepo.findById(demandeId).map(demande -> {
-			demande.setFrequencePaiement(demandeRequest.getFrequencePaiement());
-			demande.setAdresseInstallation(demandeRequest.getAdresseInstallation());
-			demande.setVille(demandeRequest.getVille());
-			demande.setGouvernorat(demandeRequest.getGouvernorat());
-			demande.setDateCreation(demandeRequest.getDateCreation());
-			demande.setEtat(demandeRequest.getEtat());
-			demande.setTelADSL(demandeRequest.getTelADSL());
-			demande.setTypeDemande(demandeRequest.getTypeDemande());
-			return demandeRepo.save(demande);
-		}).orElseThrow(() -> new ResourceNotFoundException("DemandeID "+demandeId+" not found"));
+		Client client = clientRepo.findById(idClient)
+				.orElseThrow(() -> new ResourceNotFoundException("Client By id " + idClient + " does not exist"));
+		Offre offre = offreRepository.findById(idOffre)
+				.orElseThrow(() -> new ResourceNotFoundException("Offre By id " + idOffre + " does not exist"));
+		Agence agence = agenceRepository.findById(idAgence)
+				.orElseThrow(() -> new ResourceNotFoundException("Agence By id " + idAgence + " does not exist"));
+		demandeRequest.setClient(client);
+		demandeRequest.setOffre(offre);
+		demandeRequest.setAgence(agence);
+		demandeRequest.setIdDemandeAbonnement(demandeId);
+		return demandeRepo.save(demandeRequest);
 	}
 	
 }

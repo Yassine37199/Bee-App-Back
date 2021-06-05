@@ -22,7 +22,8 @@ public class Ticket {
     private Date dateCreation;
     private Date dateResolution;
     private String statutN2;
-
+    private String AgentN2;
+    private String AgentResolution;
 
     public Ticket() {
     }
@@ -33,7 +34,7 @@ public class Ticket {
                   String type,
                   String severite,
                   Date dateResolution,
-                  String statutN2) {
+                  String statutN2, String agentN2, String agentResolution) {
         this.idTicket = idTicket;
         this.statut = statut;
         this.sujet = sujet;
@@ -41,6 +42,8 @@ public class Ticket {
         this.severite = severite;
         this.dateResolution = dateResolution;
         this.statutN2 = statutN2;
+        AgentN2 = agentN2;
+        AgentResolution = agentResolution;
     }
 
     public Ticket(String statut,
@@ -48,13 +51,16 @@ public class Ticket {
                   String type,
                   String severite,
                   Date dateResolution,
-                  String statutN2) {
+                  String statutN2,
+                  String agentN2, String agentResolution) {
         this.statut = statut;
         this.sujet = sujet;
         this.type = type;
         this.severite = severite;
         this.dateResolution = dateResolution;
         this.statutN2 = statutN2;
+        AgentN2 = agentN2;
+        AgentResolution = agentResolution;
     }
 
     public long getIdTicket() {
@@ -121,6 +127,21 @@ public class Ticket {
         this.statutN2 = statutN2;
     }
 
+    public String getAgentN2() {
+        return AgentN2;
+    }
+
+    public void setAgentN2(String agentN2) {
+        AgentN2 = agentN2;
+    }
+
+    public String getAgentResolution() {
+        return AgentResolution;
+    }
+
+    public void setAgentResolution(String agentResolution) {
+        AgentResolution = agentResolution;
+    }
 
     //Relation Ticket / Abonnement
     @ManyToOne(fetch = FetchType.LAZY , optional = false)
@@ -153,6 +174,9 @@ public class Ticket {
     public void setUser(User user) {
         this.user = user;
     }
+
+
+
 }
 
 
