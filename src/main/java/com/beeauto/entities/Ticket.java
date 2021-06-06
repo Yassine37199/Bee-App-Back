@@ -7,6 +7,7 @@ import org.hibernate.annotations.OnDeleteAction;
 import javax.persistence.*;
 import java.sql.Date;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
 public class Ticket {
@@ -19,8 +20,8 @@ public class Ticket {
     private String type;
     private String severite;
     @Transient
-    private Date dateCreation;
-    private Date dateResolution;
+    private LocalDateTime dateCreation;
+    private LocalDateTime dateResolution;
     private String statutN2;
     private String AgentN2;
     private String AgentResolution;
@@ -33,7 +34,7 @@ public class Ticket {
                   String sujet,
                   String type,
                   String severite,
-                  Date dateResolution,
+                  LocalDateTime dateResolution,
                   String statutN2, String agentN2, String agentResolution) {
         this.idTicket = idTicket;
         this.statut = statut;
@@ -50,7 +51,7 @@ public class Ticket {
                   String sujet,
                   String type,
                   String severite,
-                  Date dateResolution,
+                  LocalDateTime dateResolution,
                   String statutN2,
                   String agentN2, String agentResolution) {
         this.statut = statut;
@@ -103,19 +104,19 @@ public class Ticket {
         this.severite = severite;
     }
 
-    public Date getDateCreation() {
-        return Date.valueOf(LocalDate.now());
+    public LocalDateTime getDateCreation() {
+        return LocalDateTime.now();
     }
 
-    public void setDateCreation(Date dateCreation) {
+    public void setDateCreation(LocalDateTime dateCreation) {
         this.dateCreation = dateCreation;
     }
 
-    public Date getDateResolution() {
+    public LocalDateTime getDateResolution() {
         return dateResolution;
     }
 
-    public void setDateResolution(Date dateResolution) {
+    public void setDateResolution(LocalDateTime dateResolution) {
         this.dateResolution = dateResolution;
     }
 

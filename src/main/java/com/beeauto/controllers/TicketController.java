@@ -54,6 +54,12 @@ public class TicketController {
         return new ResponseEntity<>(tickets , HttpStatus.OK);
     }
 
+    @GetMapping("/get/N2/{agentN2}")
+    public ResponseEntity<List<Ticket>> getTicketByN2(@PathVariable("agentN2") String agentN2 ){
+        List<Ticket> tickets = ticketRepository.getTicketByUserN2(agentN2);
+        return new ResponseEntity<>(tickets , HttpStatus.OK);
+    }
+
     @PostMapping("/add/{idUser}/{idAbonnement}")
     public ResponseEntity<Ticket> addTicket(@PathVariable("idUser") long idUser ,
                                             @RequestBody Ticket ticket,

@@ -54,6 +54,12 @@ public class UserController {
 		return (List<User>)this.userRepository.findByRole("agent support technique N2");
 
 	}
+
+	@GetMapping("/get/admin")
+	public List<User> getUserAdmin(){
+		return (List<User>)this.userRepository.findByRole("admin");
+
+	}
 	
 	@PostMapping("/add/{roleId}")
 	public User createUser(@PathVariable (value = "roleId") Long roleId , @Valid @RequestBody User user) {
