@@ -35,16 +35,22 @@ public class AbonnementController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Abonnement> getOneClient(@PathVariable("id") Long id){
+    public ResponseEntity<Abonnement> getOneAbonnement(@PathVariable("id") Long id){
         Abonnement abonnement = abonnementRepo.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Abonnement By Id " + id + " does not exist"));
         return new ResponseEntity<>(abonnement , HttpStatus.OK);
     }
 
     @GetMapping("/demande/{idDemandeAbonnement}")
-    public ResponseEntity<Abonnement> getAgenceByIntitule(@PathVariable("idDemandeAbonnement") long idDemandeAbonnement){
+    public ResponseEntity<Abonnement> getAbonnementByDemande(@PathVariable("idDemandeAbonnement") long idDemandeAbonnement){
         Abonnement abonnement =  this.abonnementRepo.findByDemandeId(idDemandeAbonnement);
         return new ResponseEntity<>(abonnement , HttpStatus.OK);
+    }
+
+    @GetMapping("/cin/{cin}")
+    public ResponseEntity<List<Abonnement>> getAbonnementByCIN(@PathVariable("cin") int cin){
+        List<Abonnement> abonnements =  this.abonnementRepo.findByCIN(cin);
+        return new ResponseEntity<>(abonnements , HttpStatus.OK);
     }
 
     @GetMapping("/list")

@@ -60,4 +60,21 @@ public class Region {
     public void setUser(User user) {
         this.user = user;
     }
+
+
+
+    // Relation Region / Agent TT
+    @ManyToOne(fetch = FetchType.LAZY , optional = false)
+    @JoinColumn(name = "idAgentTT" , nullable = true)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    @Nullable
+    private AgentTT agentTT;
+
+    public AgentTT getAgentTT() {
+        return agentTT;
+    }
+
+    public void setAgentTT(AgentTT agentTT) {
+        this.agentTT = agentTT;
+    }
 }

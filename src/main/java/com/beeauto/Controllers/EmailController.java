@@ -1,18 +1,18 @@
 package com.beeauto.Controllers;
 
+import com.beeauto.entities.Commentaire;
 import com.beeauto.entities.EmailRequest;
 import com.beeauto.repositories.EmailSender;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.mail.MailSender;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.scheduling.annotation.Async;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.mail.*;
 import javax.mail.internet.AddressException;
@@ -22,6 +22,7 @@ import java.io.IOException;
 import java.util.Properties;
 
 @RestController
+@CrossOrigin(origins = "*")
 @RequestMapping("/email")
 public class EmailController{
 
@@ -33,7 +34,7 @@ public class EmailController{
 
     @Async
     @PostMapping("/send")
-    public String send(@RequestBody EmailRequest emailRequest) throws AddressException, MessagingException, IOException {
+    public ResponseEntity<EmailRequest> send(@RequestBody EmailRequest emailRequest) throws AddressException, MessagingException, IOException {
         Properties props = new Properties();
         props.put("mail.smtp.auth", "true");
         props.put("mail.smtp.starttls.enable", "true");
@@ -53,7 +54,7 @@ public class EmailController{
         msg.setContent(buildEmail(emailRequest.getContent()) , "text/html");
 
         Transport.send(msg);
-        return "Email send Successfully";
+        return new ResponseEntity<>(emailRequest , HttpStatus.OK);
 
     }
 

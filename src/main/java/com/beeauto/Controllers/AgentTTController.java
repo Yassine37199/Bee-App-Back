@@ -3,7 +3,6 @@ package com.beeauto.Controllers;
 import com.beeauto.entities.*;
 import com.beeauto.exceptions.ResourceNotFoundException;
 import com.beeauto.repositories.AgentTTRepository;
-import jdk.internal.agent.Agent;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -13,6 +12,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/agentTT")
+@CrossOrigin(origins = "*")
 public class AgentTTController {
 
     private final AgentTTRepository agentTTRepository;
@@ -25,6 +25,12 @@ public class AgentTTController {
     public ResponseEntity<List<AgentTT>> getAllAgentTT(){
         List<AgentTT> agentsTT = agentTTRepository.findAll();
         return new ResponseEntity<>(agentsTT , HttpStatus.OK);
+    }
+
+    @GetMapping("/email/{email}")
+    public ResponseEntity<AgentTT> getAgentByEmail(@PathVariable("email") String email) {
+        AgentTT agentTT = this.agentTTRepository.findByEmail(email);
+        return new ResponseEntity<>(agentTT, HttpStatus.OK);
     }
 
     @GetMapping("/get/{id}")
