@@ -5,8 +5,6 @@ import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
-import java.sql.Date;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
@@ -19,12 +17,12 @@ public class Ticket {
     private String sujet;
     private String type;
     private String severite;
-    @Transient
-    private LocalDateTime dateCreation;
     private LocalDateTime dateResolution;
+    private LocalDateTime dateCreation;
     private String statutN2;
     private String AgentN2;
     private String AgentResolution;
+    private LocalDateTime dateEscalade;
 
     public Ticket() {
     }
@@ -35,16 +33,18 @@ public class Ticket {
                   String type,
                   String severite,
                   LocalDateTime dateResolution,
-                  String statutN2, String agentN2, String agentResolution) {
+                  LocalDateTime dateCreation, String statutN2, String agentN2, String agentResolution, LocalDateTime dateEscalade) {
         this.idTicket = idTicket;
         this.statut = statut;
         this.sujet = sujet;
         this.type = type;
         this.severite = severite;
         this.dateResolution = dateResolution;
+        this.dateCreation = dateCreation;
         this.statutN2 = statutN2;
         AgentN2 = agentN2;
         AgentResolution = agentResolution;
+        this.dateEscalade = dateEscalade;
     }
 
     public Ticket(String statut,
@@ -52,16 +52,18 @@ public class Ticket {
                   String type,
                   String severite,
                   LocalDateTime dateResolution,
-                  String statutN2,
-                  String agentN2, String agentResolution) {
+                  LocalDateTime dateCreation, String statutN2,
+                  String agentN2, String agentResolution, LocalDateTime dateEscalade) {
         this.statut = statut;
         this.sujet = sujet;
         this.type = type;
         this.severite = severite;
         this.dateResolution = dateResolution;
+        this.dateCreation = dateCreation;
         this.statutN2 = statutN2;
         AgentN2 = agentN2;
         AgentResolution = agentResolution;
+        this.dateEscalade = dateEscalade;
     }
 
     public long getIdTicket() {
@@ -105,11 +107,10 @@ public class Ticket {
     }
 
     public LocalDateTime getDateCreation() {
-        return LocalDateTime.now();
+        return dateCreation;
     }
 
     public void setDateCreation(LocalDateTime dateCreation) {
-        this.dateCreation = dateCreation;
     }
 
     public LocalDateTime getDateResolution() {
@@ -142,6 +143,14 @@ public class Ticket {
 
     public void setAgentResolution(String agentResolution) {
         AgentResolution = agentResolution;
+    }
+
+    public LocalDateTime getDateEscalade() {
+        return dateEscalade;
+    }
+
+    public void setDateEscalade(LocalDateTime dateEscalade) {
+        this.dateEscalade = dateEscalade;
     }
 
     //Relation Ticket / Abonnement
