@@ -76,6 +76,7 @@ public class ClientController {
 			client.setDateNaissance(clientRequest.getDateNaissance());
 			client.setTelephone(clientRequest.getTelephone());
 			client.setDateCreation(clientRequest.getDateCreation());
+			client.setActive(clientRequest.getActive());
 			return clientRepository.save(client);
 		}).orElseThrow(() -> new ResourceNotFoundException("ClientID "+id+" not found"));
 		}

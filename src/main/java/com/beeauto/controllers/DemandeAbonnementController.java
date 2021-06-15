@@ -55,6 +55,12 @@ public class DemandeAbonnementController {
 		return new ResponseEntity<>(demande , HttpStatus.OK);
 	}
 
+	@GetMapping("/get/backoffice/{agent}")
+	public ResponseEntity<List<DemandeAbonnement>> getDemandeByBackOffice(@PathVariable("agent") String agent ){
+		List<DemandeAbonnement> demandes = demandeRepo.getDemandeByAgentBackOffice(agent);
+		return new ResponseEntity<>(demandes , HttpStatus.OK);
+	}
+
 
 	@PostMapping("/add/{idClient}/{idOffre}/{idAgence}")
 	public DemandeAbonnement addDemande( @Valid @RequestBody DemandeAbonnement demande,

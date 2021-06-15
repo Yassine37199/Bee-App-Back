@@ -3,12 +3,9 @@ package com.beeauto.entities;
 
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
-import org.springframework.stereotype.Controller;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
 import java.sql.Date;
-import java.time.LocalDate;
 
 @Entity
 public class Abonnement {
@@ -17,25 +14,22 @@ public class Abonnement {
     private long idAbonnement;
 
     private String refTT;
-
-    @Transient
     private Date dateCreation;
     private  String etatTT;
     private  String agenceLivraison;
+    private boolean isActive;
 
     public Abonnement(long idAbonnement,
                       String refTT,
                       Date dateCreation,
                       String etatTT,
-                      String modemSN,
-                      String agenceLivraison,
-                      String loginAbonnement,
-                      String mdp) {
+                      String agenceLivraison, boolean isActive) {
         this.idAbonnement = idAbonnement;
         this.refTT = refTT;
         this.dateCreation = dateCreation;
         this.etatTT = etatTT;
         this.agenceLivraison = agenceLivraison;
+        this.isActive = isActive;
     }
 
     public Abonnement() {
@@ -58,7 +52,7 @@ public class Abonnement {
     }
 
     public Date getDateCreation() {
-        return Date.valueOf(LocalDate.now());
+        return dateCreation;
     }
 
     public void setDateCreation(Date dateCreation) {
@@ -79,6 +73,14 @@ public class Abonnement {
 
     public void setAgenceLivraison(String agenceLivraison) {
         this.agenceLivraison = agenceLivraison;
+    }
+
+    public boolean isActive() {
+        return isActive;
+    }
+
+    public void setActive(boolean active) {
+        isActive = active;
     }
 
     //Abonnement-Demande

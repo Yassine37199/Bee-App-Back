@@ -43,11 +43,13 @@ public class Agence {
 	@Column(name = "details")
 	private String details;
 
+	private boolean isActive;
+
     public Agence() {
     }
 
     public Agence(String type, String code, String intitule, String contact, int tel,
-                  String adresse, String agence_mere, String region, String etat, String details) {
+				  String adresse, String agence_mere, String region, String etat, String details, boolean isActive) {
 		this.type = type;
 		this.code = code;
 		this.intitule = intitule;
@@ -58,6 +60,7 @@ public class Agence {
 		this.region = region;
 		this.etat = etat;
 		this.details = details;
+		this.isActive = isActive;
 	}
 	public String getType() {
 		return type;
@@ -120,6 +123,13 @@ public class Agence {
 		this.details = details;
 	}
 
+	public boolean isActive() {
+		return isActive;
+	}
+
+	public void setActive(boolean active) {
+		isActive = active;
+	}
 
 	public long getIdAgence() {
 		return idAgence;

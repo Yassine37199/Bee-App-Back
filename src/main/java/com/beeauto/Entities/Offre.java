@@ -23,6 +23,7 @@ public class Offre {
 	@Column(name="debit")
 	private int debit;
 
+	private boolean isActive;
 
 
 
@@ -56,6 +57,13 @@ public class Offre {
 	}
 
 
+	public boolean isActive() {
+		return isActive;
+	}
+
+	public void setActive(boolean active) {
+		isActive = active;
+	}
 
 	@Override
 	public String toString() {
