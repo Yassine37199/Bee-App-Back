@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 
 import java.sql.Date;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -59,9 +60,10 @@ public class Client {
 	@Column(name="telephone")
 	private int telephone;
 
-	@Transient
 	@Column(name="dateCreation")
-	private Date dateCreation;
+	private LocalDateTime dateCreation;
+
+
 	
 	public Client() {};
 
@@ -73,7 +75,8 @@ public class Client {
 				  @NotBlank(message = "adresse is mandotory") String adresse,
 				  @Min(value = 1000, message = "codePostal should not be less than 1000") int codePostal,
 				  @NotNull(message = "dateNaissance is mandotory") Date dateNaissance,
-				  @Min(value = 9999999, message = "telephone should not be less than 9999999") int telephone) {
+				  @Min(value = 9999999, message = "telephone should not be less than 9999999") int telephone,
+				  LocalDateTime dateCreation) {
 		this.name = name;
 		this.cin = cin;
 		this.email = email;

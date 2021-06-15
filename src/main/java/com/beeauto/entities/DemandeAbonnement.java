@@ -6,9 +6,8 @@ import java.time.LocalDate;
 import javax.persistence.*;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.sun.istack.Nullable;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
@@ -50,10 +49,9 @@ public class DemandeAbonnement {
 	@NotBlank(message="typeDemande is mandotory")
 	@Column(name="typeDemande")
 	private String typeDemande;
-	
-	
 
-
+	@Nullable
+	private String agentBackOffice;
 
 
 
@@ -129,6 +127,14 @@ public class DemandeAbonnement {
 
 	public void setTypeDemande(String typeDemande) {
 		this.typeDemande = typeDemande;
+	}
+
+	public String getAgentBackOffice() {
+		return agentBackOffice;
+	}
+
+	public void setAgentBackOffice(String agentBackOffice) {
+		this.agentBackOffice = agentBackOffice;
 	}
 
 	@Override

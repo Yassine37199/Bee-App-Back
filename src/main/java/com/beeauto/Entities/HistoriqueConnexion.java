@@ -94,19 +94,6 @@ public class HistoriqueConnexion {
         this.telAdsl = telAdsl;
     }
 
-    /*** Many To One ***/
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "idConfig", nullable = false)
-    @OnDelete(action = OnDeleteAction.CASCADE)
-    private ConfigModem config ;
 
-
-    public ConfigModem getConfig() {
-        return config;
-    }
-
-    public void setConfig(ConfigModem config) {
-        this.config=config;
-    }
 }
 

@@ -1,6 +1,7 @@
 package com.beeauto.controllers;
 
 import com.beeauto.entities.Abonnement;
+import com.beeauto.entities.Role;
 import com.beeauto.entities.Ticket;
 import com.beeauto.entities.User;
 import com.beeauto.exceptions.ResourceNotFoundException;
@@ -74,10 +75,14 @@ public class TicketController {
         return new ResponseEntity<>(ticket, HttpStatus.CREATED);
     }
 
-    @PutMapping("/update/{id}")
+    @PutMapping("/update/{id}/{idAbonnement}")
     public ResponseEntity<Ticket> UpdateTicket(@PathVariable("id") Long id ,
+                                               @PathVariable("idAbonnement") Long idAbonnement,
                                                @RequestBody Ticket ticket) {
+        Abonnement abonnement = abonnementRepository.findById(idAbonnement)
+                .orElseThrow(() -> new com.beeauto.Exception.ResourceNotFoundException("errreeeur"));
         ticket.setIdTicket(id);
+        ticket.setAbonnement(abonnement);
         ticketRepository.save(ticket);
         return new ResponseEntity<>(ticket , HttpStatus.OK);
     }

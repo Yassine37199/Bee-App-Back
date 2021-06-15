@@ -75,9 +75,14 @@ public class ReclamationTTController {
 
 
 
-	@PutMapping("/update/{id}")
-	public ReclamationTT updateRecTT(@PathVariable("id") long id, @Valid @RequestBody ReclamationTT recRequest) {
+	@PutMapping("/update/{id}/{idAbonnement}")
+	public ReclamationTT updateRecTT(@PathVariable("id") long id,
+									 @Valid @RequestBody ReclamationTT recRequest,
+									 @PathVariable("idAbonnement") long idAbonnement) {
+		Abonnement abonnement = abonnementRepository.findById(idAbonnement)
+				.orElseThrow(() -> new ResourceNotFoundException("Abonnement By id " + idAbonnement + " does not exist"));
 		return recTT.findById(id).map(rec -> {
+			rec.setAbonnement(abonnement);
 			rec.setTelADSL(recRequest.getTelADSL());
 			rec.setObjet(recRequest.getObjet());
 			rec.setEtat(recRequest.getEtat());
