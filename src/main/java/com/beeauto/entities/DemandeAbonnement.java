@@ -53,6 +53,9 @@ public class DemandeAbonnement {
 	@Nullable
 	private String agentBackOffice;
 
+	private boolean isActive;
+
+
 
 
 	public long getIdDemandeAbonnement() {
@@ -135,6 +138,14 @@ public class DemandeAbonnement {
 
 	public void setAgentBackOffice(String agentBackOffice) {
 		this.agentBackOffice = agentBackOffice;
+	}
+
+	public boolean isActive() {
+		return isActive;
+	}
+
+	public void setActive(boolean active) {
+		isActive = active;
 	}
 
 	@Override

@@ -1,10 +1,6 @@
 package com.beeauto.entities;
 
-import org.springframework.data.annotation.Transient;
-import org.springframework.web.bind.annotation.CrossOrigin;
-
 import java.sql.Date;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import javax.persistence.Column;
@@ -63,20 +59,23 @@ public class Client {
 	@Column(name="dateCreation")
 	private LocalDateTime dateCreation;
 
+	private Boolean isActive;
+
 
 	
 	public Client() {};
 
 	public Client(@NotBlank(message = "name is mandotory") String name,
-				  @Min(value = 9999999, message = "cin should not be less than 9999999") int cin,
+				  int cin,
 				  @Email(message = "Email should be valid") String email,
 				  @NotBlank(message = "ville is mandotory") String ville,
 				  @NotBlank(message = "gouvernorat is mandotory") String gouvernorat,
 				  @NotBlank(message = "adresse is mandotory") String adresse,
-				  @Min(value = 1000, message = "codePostal should not be less than 1000") int codePostal,
+				  int codePostal,
 				  @NotNull(message = "dateNaissance is mandotory") Date dateNaissance,
-				  @Min(value = 9999999, message = "telephone should not be less than 9999999") int telephone,
-				  LocalDateTime dateCreation) {
+				  int telephone,
+				  LocalDateTime dateCreation,
+				  Boolean isActive) {
 		this.name = name;
 		this.cin = cin;
 		this.email = email;
@@ -86,10 +85,22 @@ public class Client {
 		this.codePostal = codePostal;
 		this.dateNaissance = dateNaissance;
 		this.telephone = telephone;
+		this.dateCreation = dateCreation;
+		this.isActive = isActive;
 	}
 
-	public Client(long idClient, String name, int cin, String email, String ville, String gouvernorat, String adresse, int codePostal, Date dateNaissance, int telephone) {
-	
+	public Client(long idClient,
+				  String name,
+				  int cin,
+				  String email,
+				  String ville,
+				  String gouvernorat,
+				  String adresse,
+				  int codePostal,
+				  Date dateNaissance,
+				  int telephone,
+				  LocalDateTime dateCreation, Boolean isActive) {
+
 		this.idClient = idClient;
 		this.name = name;
 		this.cin = cin;
@@ -100,6 +111,8 @@ public class Client {
 		this.codePostal = codePostal;
 		this.dateNaissance = dateNaissance;
 		this.telephone = telephone;
+		this.dateCreation = dateCreation;
+		this.isActive = isActive;
 	}
 
 	public long getIdClient() {
@@ -182,12 +195,20 @@ public class Client {
 		this.telephone = telephone;
 	}
 
-	public Date getDateCreation() {
+	public LocalDateTime getDateCreation() {
 		return dateCreation;
 	}
 
-	public void setDateCreation(Date dateCreation) {
-		this.dateCreation = Date.valueOf(LocalDate.now());;
+	public void setDateCreation(LocalDateTime dateCreation) {
+		this.dateCreation = dateCreation;;
+	}
+
+	public Boolean getActive() {
+		return isActive;
+	}
+
+	public void setActive(Boolean active) {
+		isActive = active;
 	}
 
 	@Override

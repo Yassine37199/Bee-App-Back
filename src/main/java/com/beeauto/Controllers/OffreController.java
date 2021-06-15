@@ -58,6 +58,7 @@ public class OffreController {
 		return offreRepository.findById(id).map(offre -> {
 			offre.setlabelle(offreRequest.getlabelle());
 			offre.setDebit(offreRequest.getDebit());
+			offre.setActive(offreRequest.isActive());
 			return offreRepository.save(offre);
 		}).orElseThrow(() -> new ResourceNotFoundException("OffreID "+id+" not found"));
 	}

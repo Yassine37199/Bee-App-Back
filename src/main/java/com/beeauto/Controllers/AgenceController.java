@@ -61,6 +61,7 @@ public class AgenceController {
 			agence.setRegion(agenceRequest.getRegion());
 			agence.setEtat(agenceRequest.getEtat());
 			agence.setDetails(agenceRequest.getDetails());
+			agence.setActive(agenceRequest.isActive());
 			return agenceRepository.save(agence);
 		}).orElseThrow(() -> new ResourceNotFoundException("agenceId" + agenceId + "notfound"));
 	}
