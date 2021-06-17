@@ -10,8 +10,15 @@ import java.time.LocalDateTime;
 @Entity
 public class Ticket {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-
+    @SequenceGenerator(
+            name = "ticket_sequence",
+            sequenceName = "ticket_sequence",
+            allocationSize = 1
+    )
+    @GeneratedValue(
+            strategy = GenerationType.SEQUENCE,
+            generator = "ticket_sequence"
+    )
     private long idTicket;
     private String statut;
     private String sujet;

@@ -1,10 +1,6 @@
 package com.beeauto.entities;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 
@@ -12,7 +8,15 @@ import javax.validation.constraints.NotBlank;
 public class Offre {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@SequenceGenerator(
+			name = "offre_sequence",
+			sequenceName = "offre_sequence",
+			allocationSize = 1
+	)
+	@GeneratedValue(
+			strategy = GenerationType.SEQUENCE,
+			generator = "offre_sequence"
+	)
 	private long idOffre;
 	
 	@NotBlank(message="labelle is mandotory")

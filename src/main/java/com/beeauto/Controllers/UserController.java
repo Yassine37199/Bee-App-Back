@@ -55,6 +55,12 @@ public class UserController {
 
 	}
 
+	@GetMapping("/get/backoffice")
+	public List<User> getUserBackOffice(){
+		return (List<User>)this.userRepository.findByRole("agent Backoffice");
+
+	}
+
 	@GetMapping("/get/admin")
 	public List<User> getUserAdmin(){
 		return (List<User>)this.userRepository.findByRole("admin");

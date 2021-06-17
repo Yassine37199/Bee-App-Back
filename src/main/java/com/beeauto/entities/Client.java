@@ -3,11 +3,7 @@ package com.beeauto.entities;
 import java.sql.Date;
 import java.time.LocalDateTime;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
@@ -17,7 +13,15 @@ import javax.validation.constraints.NotNull;
 public class Client {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@SequenceGenerator(
+			name = "client_sequence",
+			sequenceName = "client_sequence",
+			allocationSize = 1
+	)
+	@GeneratedValue(
+			strategy = GenerationType.SEQUENCE,
+			generator = "client_sequence"
+	)
 	private long idClient;
 	
 	@NotBlank(message="name is mandotory")

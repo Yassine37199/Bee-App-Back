@@ -10,7 +10,13 @@ import java.sql.Date;
 @Entity
 public class Abonnement {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @SequenceGenerator( name = "abonnement_sequence",
+                        sequenceName = "abonnement_sequence",
+                        allocationSize = 1)
+
+    @GeneratedValue(    strategy = GenerationType.SEQUENCE,
+                        generator = "abonnement_sequence")
+
     private long idAbonnement;
 
     private String refTT;

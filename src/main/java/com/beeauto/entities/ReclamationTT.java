@@ -15,7 +15,15 @@ public class ReclamationTT {
 	
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@SequenceGenerator(
+			name = "reclamation_sequence",
+			sequenceName = "reclamation_sequence",
+			allocationSize = 1
+	)
+	@GeneratedValue(
+			strategy = GenerationType.SEQUENCE,
+			generator = "reclamation_sequence"
+	)
 	private long idReclamation;
 	
 	@Min(value = 9999999, message = "telADSL should not be less than 9999999")

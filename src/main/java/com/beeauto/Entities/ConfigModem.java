@@ -8,7 +8,15 @@ import javax.persistence.*;
 @Entity
 public class ConfigModem {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @SequenceGenerator(
+            name = "modem_sequence",
+            sequenceName = "modem_sequence",
+            allocationSize = 1
+    )
+    @GeneratedValue(
+            strategy = GenerationType.SEQUENCE,
+            generator = "modem_sequence"
+    )
     private long idConfig;
     private String modemSN;
     private String loginConfig;

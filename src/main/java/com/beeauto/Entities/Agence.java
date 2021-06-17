@@ -1,15 +1,17 @@
 package com.beeauto.entities;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class Agence {
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@SequenceGenerator( name = "agence_sequence",
+			sequenceName = "agence_sequence",
+			allocationSize = 1)
+
+	@GeneratedValue(    strategy = GenerationType.SEQUENCE,
+			generator = "agence_sequence")
+
 	private long idAgence;
 	
 	@Column(name = "type" )

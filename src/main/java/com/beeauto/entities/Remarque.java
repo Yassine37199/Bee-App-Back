@@ -12,7 +12,15 @@ import java.time.LocalDate;
 public class Remarque {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @SequenceGenerator(
+            name = "remarque_sequence",
+            sequenceName = "remarque_sequence",
+            allocationSize = 1
+    )
+    @GeneratedValue(
+            strategy = GenerationType.SEQUENCE,
+            generator = "remarque_sequence"
+    )
 
     private long idRemarque;
     private String text;

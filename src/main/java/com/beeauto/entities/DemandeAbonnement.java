@@ -12,10 +12,19 @@ import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
 @Entity
+@Table(name = "demande_abonnement")
 public class DemandeAbonnement {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@SequenceGenerator(
+			name = "demande_sequence",
+			sequenceName = "demande_sequence",
+			allocationSize = 1
+	)
+	@GeneratedValue(
+			strategy = GenerationType.SEQUENCE,
+			generator = "demande_sequence"
+	)
 	private long idDemandeAbonnement;
 	
 	@NotBlank(message="frequencePaiement is mandotory")

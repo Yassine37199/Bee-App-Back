@@ -61,6 +61,12 @@ public class DemandeAbonnementController {
 		return new ResponseEntity<>(demandes , HttpStatus.OK);
 	}
 
+	@GetMapping("/get/repartiton")
+	public ResponseEntity<List<DemandeAbonnement>> getDemandeRepartition(){
+		List<DemandeAbonnement> demandes = demandeRepo.getDemandeRepartition();
+		return new ResponseEntity<>(demandes , HttpStatus.OK);
+	}
+
 
 	@PostMapping("/add/{idClient}/{idOffre}/{idAgence}")
 	public DemandeAbonnement addDemande( @Valid @RequestBody DemandeAbonnement demande,

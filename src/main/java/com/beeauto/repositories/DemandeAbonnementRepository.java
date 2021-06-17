@@ -14,5 +14,10 @@ public interface DemandeAbonnementRepository extends JpaRepository<DemandeAbonne
     @Query("SELECT d FROM DemandeAbonnement d " +
             "WHERE d.agentBackOffice = ?1")
     List<DemandeAbonnement> getDemandeByAgentBackOffice(String AgentBackOffice);
+ 
+
+    @Query("SELECT d FROM DemandeAbonnement d " +
+            "WHERE d.agentBackOffice IS NULL")
+    List<DemandeAbonnement> getDemandeRepartition();
 
 }
