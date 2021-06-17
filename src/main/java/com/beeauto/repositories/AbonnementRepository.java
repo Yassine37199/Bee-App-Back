@@ -19,5 +19,9 @@ public interface AbonnementRepository extends JpaRepository<Abonnement , Long> {
             "WHERE ab.demandeAbonnement.client.cin = ?1")
     List<Abonnement> findByCIN(int cin);
 
+    @Query("SELECT ab FROM Abonnement ab " +
+            "WHERE ab.refTT = ?1")
+    List<Abonnement> findByRefTT(String reftt);
+
 
 }

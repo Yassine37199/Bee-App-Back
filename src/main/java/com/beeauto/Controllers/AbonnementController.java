@@ -53,6 +53,12 @@ public class AbonnementController {
         return new ResponseEntity<>(abonnements , HttpStatus.OK);
     }
 
+    @GetMapping("/reftt/{reftt}")
+    public ResponseEntity<List<Abonnement>> getAbonnementByRefTT(@PathVariable("reftt") String reftt){
+        List<Abonnement> abonnements =  this.abonnementRepo.findByRefTT(reftt);
+        return new ResponseEntity<>(abonnements , HttpStatus.OK);
+    }
+
     @GetMapping("/list")
     public List<Abonnement> listAbonnement()
     {

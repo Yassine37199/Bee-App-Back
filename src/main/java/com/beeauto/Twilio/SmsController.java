@@ -21,8 +21,8 @@ public class SmsController {
         this.twilioConfiguration = twilioConfiguration;
     }
 
-    @PostMapping("send")
-    public void sendSms(@RequestBody SmsRequest smsRequest) {
+    @PostMapping("/send")
+    public SmsRequest sendSms(@RequestBody SmsRequest smsRequest) {
         if(isPhoneNumberValid(smsRequest.getPhoneNumber())) {
             MessageCreator creator = Message.creator(
                     new PhoneNumber(smsRequest.getPhoneNumber()),
@@ -31,10 +31,12 @@ public class SmsController {
             );
             creator.create();
             LOGGER.info("Send SMS " + smsRequest);
+            return smsRequest;
         }
         else {
             throw new IllegalArgumentException("Phone Number not valid");
         }
+
     }
 
     private boolean isPhoneNumberValid(String phoneNumber) {

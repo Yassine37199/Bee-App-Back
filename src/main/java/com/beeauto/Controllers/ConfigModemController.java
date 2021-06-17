@@ -41,6 +41,12 @@ public class ConfigModemController {
         return new ResponseEntity<>(configModem , HttpStatus.OK);
     }
 
+    @GetMapping("/login/{login}")
+    public ResponseEntity<List<ConfigModem>> getConfigByLogin(@PathVariable("login") String login){
+        List<ConfigModem> modems =  this.configModemRepo.getModemByLogin(login);
+        return new ResponseEntity<>(modems , HttpStatus.OK);
+    }
+
     @PostMapping("/add/{idAbonnement}")
     public ConfigModem addConfigModem(@Valid @RequestBody ConfigModem configModem,
                                       @PathVariable("idAbonnement") long idAbonnement){
