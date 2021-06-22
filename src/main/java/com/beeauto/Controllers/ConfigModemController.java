@@ -63,4 +63,10 @@ public class ConfigModemController {
         configModemRepo.save(configModem);
         return new ResponseEntity<>(configModem , HttpStatus.OK);
     }
+
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<?> DeleteEmployee(@PathVariable("id") Long id){
+        configModemRepo.deleteById(id);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
 }

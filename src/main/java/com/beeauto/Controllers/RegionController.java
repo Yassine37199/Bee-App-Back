@@ -65,7 +65,7 @@ public class RegionController {
                 regionRepository.findById(idRegion).map(region -> {
                     User user = userRepository.findById(idUser)
                             .orElseThrow(() -> new com.beeauto.Exception.ResourceNotFoundException("errreeeur"));
-                    region.setRegionName(region.getRegionName());
+                    region.setRegionName(regionRequest.getRegionName());
                     region.setUser(user);
                     return regionRepository.save(region);
                 }).orElseThrow(() -> new

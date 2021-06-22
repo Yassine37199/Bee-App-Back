@@ -53,7 +53,7 @@ public class EmailController{
         msg.setSubject(emailRequest.getSubject());
         msg.setContent(buildEmail(emailRequest.getContent()) , "text/html");
 
-        Transport.send(msg);
+        Transport.send(msg);   
         return new ResponseEntity<>(emailRequest , HttpStatus.OK);
 
     }
