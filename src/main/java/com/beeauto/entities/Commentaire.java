@@ -25,6 +25,7 @@ public class Commentaire {
     )
 
     private long idCommentaire;
+    @Column(columnDefinition = "LONGTEXT")
     private String text;
     @Transient
     private Date dateCreation;

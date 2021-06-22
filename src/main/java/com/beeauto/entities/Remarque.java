@@ -80,8 +80,8 @@ public class Remarque {
 
 
     // Relation Remarque / Abonnement
-    @ManyToOne(fetch = FetchType.LAZY , optional = false)
-    @JoinColumn(name = "idAbonnement" , nullable = true)
+    @ManyToOne(fetch = FetchType.LAZY , optional = true)
+    @JoinColumn(name = "idAbonnement")
     @OnDelete(action = OnDeleteAction.CASCADE)
     @Nullable
     private Abonnement abonnement;
@@ -96,8 +96,8 @@ public class Remarque {
 
 
     // Relation Remarque / DemandeAbonnement
-    @ManyToOne(fetch = FetchType.LAZY , optional = false)
-    @JoinColumn(name = "idDemandeAbonnement" , nullable = true)
+    @ManyToOne(fetch = FetchType.LAZY , optional = true)
+    @JoinColumn(name = "idDemandeAbonnement")
     @OnDelete(action = OnDeleteAction.CASCADE)
     @Nullable
     private DemandeAbonnement demandeAbonnement;
