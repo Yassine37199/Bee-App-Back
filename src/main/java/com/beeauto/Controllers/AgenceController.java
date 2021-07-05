@@ -4,13 +4,12 @@ import java.util.List;
 
 import javax.validation.Valid;
 
-import com.beeauto.entities.Client;
+import com.beeauto.entities.point_vente;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import com.beeauto.entities.Agence;
 import com.beeauto.repositories.AgenceRepository;
 import com.beeauto.Exception.ResourceNotFoundException;
 
@@ -24,44 +23,44 @@ public class AgenceController {
 
 
 	@GetMapping("/list")
-	public List<Agence>getAllAgence(){
-		return (List<Agence>) agenceRepository.findAll();
+	public List<point_vente>getAllAgence(){
+		return (List<point_vente>) agenceRepository.findAll();
 	}
 
 	@GetMapping("/intitule/{intitule}")
-	public ResponseEntity<Agence> getAgenceByIntitule(@PathVariable("intitule") String intitule){
-		Agence agence =  this.agenceRepository.findByIntitule(intitule);
-		return new ResponseEntity<>(agence , HttpStatus.OK);
+	public ResponseEntity<point_vente> getAgenceByIntitule(@PathVariable("intitule") String intitule){
+		point_vente pointvente =  this.agenceRepository.findByIntitule(intitule);
+		return new ResponseEntity<>(pointvente, HttpStatus.OK);
 	}
 
 	@GetMapping("/{id}")
-	public ResponseEntity<Agence> getOneAgence(@PathVariable("id") Long id){
-		Agence agence = agenceRepository.findById(id)
-				.orElseThrow(() -> new com.beeauto.exceptions.ResourceNotFoundException("Agence By Id " + id + " does not exist"));
-		return new ResponseEntity<>(agence , HttpStatus.OK);
+	public ResponseEntity<point_vente> getOneAgence(@PathVariable("id") Long id){
+		point_vente pointvente = agenceRepository.findById(id)
+				.orElseThrow(() -> new com.beeauto.exceptions.ResourceNotFoundException("point_vente By Id " + id + " does not exist"));
+		return new ResponseEntity<>(pointvente, HttpStatus.OK);
 	}
 
 	@PostMapping("/add")
-	public Agence createAgence(@Valid@RequestBody Agence agence) {
-		return agenceRepository.save(agence);
+	public point_vente createAgence(@Valid@RequestBody point_vente pointvente) {
+		return agenceRepository.save(pointvente);
 	}
 
 	@PutMapping("/update/{agenceId}")
-	public Agence updateAgence (@PathVariable (value = "agenceId") Long
-										agenceId, @Valid @RequestBody Agence agenceRequest) {
+	public point_vente updateAgence (@PathVariable (value = "agenceId") Long
+										agenceId, @Valid @RequestBody point_vente pointventeRequest) {
 
 		return agenceRepository.findById(agenceId).map(agence -> {
-			agence.setType(agenceRequest.getType());
-			agence.setCode(agenceRequest.getCode());
-			agence.setIntitule(agenceRequest.getIntitule());
-			agence.setContact(agenceRequest.getContact());
-			agence.setTel(agenceRequest.getTel());
-			agence.setAdresse(agenceRequest.getAdresse());
-			agence.setAgence_mere(agenceRequest.getAgence_mere());
-			agence.setRegion(agenceRequest.getRegion());
-			agence.setEtat(agenceRequest.getEtat());
-			agence.setDetails(agenceRequest.getDetails());
-			agence.setActive(agenceRequest.isActive());
+			agence.setType(pointventeRequest.getType());
+			agence.setCode(pointventeRequest.getCode());
+			agence.setIntitule(pointventeRequest.getIntitule());
+			agence.setContact(pointventeRequest.getContact());
+			agence.setTel(pointventeRequest.getTel());
+			agence.setAdresse(pointventeRequest.getAdresse());
+			agence.setAgence_mere(pointventeRequest.getAgence_mere());
+			agence.setRegion(pointventeRequest.getRegion());
+			agence.setEtat(pointventeRequest.getEtat());
+			agence.setDetails(pointventeRequest.getDetails());
+			agence.setActive(pointventeRequest.isActive());
 			return agenceRepository.save(agence);
 		}).orElseThrow(() -> new ResourceNotFoundException("agenceId" + agenceId + "notfound"));
 	}

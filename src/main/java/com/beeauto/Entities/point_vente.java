@@ -3,7 +3,7 @@ package com.beeauto.entities;
 import javax.persistence.*;
 
 @Entity
-public class Agence {
+public class point_vente {
 	@Id
 	@SequenceGenerator( name = "agence_sequence",
 			sequenceName = "agence_sequence",
@@ -12,7 +12,7 @@ public class Agence {
 	@GeneratedValue(    strategy = GenerationType.SEQUENCE,
 			generator = "agence_sequence")
 
-	private long idAgence;
+	private long idPDV;
 	
 	@Column(name = "type" )
 	private String type;
@@ -47,11 +47,11 @@ public class Agence {
 
 	private boolean isActive;
 
-    public Agence() {
+    public point_vente() {
     }
 
-    public Agence(String type, String code, String intitule, String contact, int tel,
-				  String adresse, String agence_mere, String region, String etat, String details, boolean isActive) {
+    public point_vente(String type, String code, String intitule, String contact, int tel,
+					   String adresse, String agence_mere, String region, String etat, String details, boolean isActive) {
 		this.type = type;
 		this.code = code;
 		this.intitule = intitule;
@@ -134,10 +134,10 @@ public class Agence {
 	}
 
 	public long getIdAgence() {
-		return idAgence;
+		return idPDV;
 	}
 
 	public void setIdAgence(long idAgence) {
-		this.idAgence = idAgence;
+		this.idPDV = idPDV;
 	}
 }

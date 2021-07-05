@@ -77,11 +77,11 @@ public class DemandeAbonnementController {
 				.orElseThrow(() -> new ResourceNotFoundException("Client By id " + idClient + " does not exist"));
 		Offre offre = offreRepository.findById(idOffre)
 				.orElseThrow(() -> new ResourceNotFoundException("Offre By id " + idOffre + " does not exist"));
-		Agence agence = agenceRepository.findById(idAgence)
-				.orElseThrow(() -> new ResourceNotFoundException("Agence By id " + idAgence + " does not exist"));
+		point_vente pointvente = agenceRepository.findById(idAgence)
+				.orElseThrow(() -> new ResourceNotFoundException("point_vente By id " + idAgence + " does not exist"));
 		demande.setClient(client);
 		demande.setOffre(offre);
-		demande.setAgence(agence);
+		demande.setPointvente(pointvente);
 		return demandeRepo.save(demande);
 	}
 
@@ -99,11 +99,11 @@ public class DemandeAbonnementController {
 				.orElseThrow(() -> new ResourceNotFoundException("Client By id " + idClient + " does not exist"));
 		Offre offre = offreRepository.findById(idOffre)
 				.orElseThrow(() -> new ResourceNotFoundException("Offre By id " + idOffre + " does not exist"));
-		Agence agence = agenceRepository.findById(idAgence)
-				.orElseThrow(() -> new ResourceNotFoundException("Agence By id " + idAgence + " does not exist"));
+		point_vente pointvente = agenceRepository.findById(idAgence)
+				.orElseThrow(() -> new ResourceNotFoundException("point_vente By id " + idAgence + " does not exist"));
 		demandeRequest.setClient(client);
 		demandeRequest.setOffre(offre);
-		demandeRequest.setAgence(agence);
+		demandeRequest.setPointvente(pointvente);
 		demandeRequest.setIdDemandeAbonnement(demandeId);
 		return demandeRepo.save(demandeRequest);
 	}

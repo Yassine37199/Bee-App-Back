@@ -62,4 +62,5 @@ public class OffreController {
 			return offreRepository.save(offre);
 		}).orElseThrow(() -> new ResourceNotFoundException("OffreID "+id+" not found"));
 	}
+
 }

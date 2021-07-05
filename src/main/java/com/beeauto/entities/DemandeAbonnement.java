@@ -172,7 +172,7 @@ public class DemandeAbonnement {
 	
 //Client-Demande 
 	 @ManyToOne(fetch = FetchType.LAZY, optional = false)
-	 @JoinColumn(name = "idClient", nullable = false)
+	 @JoinColumn(name = "idClient", nullable = true)
 	 @OnDelete(action = OnDeleteAction.CASCADE)
 	
 	
@@ -191,7 +191,7 @@ public class DemandeAbonnement {
 	
 //Offre-Demande
 	 @ManyToOne(fetch = FetchType.LAZY, optional = false)
-	 @JoinColumn(name = "idOffre", nullable = false)
+	 @JoinColumn(name = "idOffre", nullable = true)
 	 @OnDelete(action = OnDeleteAction.CASCADE)
 	
 	
@@ -206,21 +206,21 @@ public class DemandeAbonnement {
 		 this.offre=offre;
 	 }
 	 
-//Agence-Demande
+//point_vente-Demande
 		 @ManyToOne(fetch = FetchType.LAZY, optional = false)
-		 @JoinColumn(name = "idAgence", nullable = false)
+		 @JoinColumn(name = "idAgence", nullable = true)
 		 @OnDelete(action = OnDeleteAction.CASCADE)
 		
 		
 		
-		 private Agence agence;
+		 private point_vente pointvente;
 		 
-		 public Agence getAgence() {
-			 return agence;
+		 public point_vente getPointvente() {
+			 return pointvente;
 		 }
 		 
-		 public void setAgence (Agence agence) {
-			 this.agence=agence;
+		 public void setPointvente(point_vente pointvente) {
+			 this.pointvente = pointvente;
 		 }	 
 	
 }

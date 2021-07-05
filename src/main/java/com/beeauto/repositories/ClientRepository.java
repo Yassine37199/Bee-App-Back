@@ -11,7 +11,7 @@ import org.springframework.stereotype.Repository;
 public interface ClientRepository extends CrudRepository<Client, Long>{
 
     @Query("SELECT c FROM Client c " +
-            "WHERE c.cin = ?1")
+            "WHERE c.cin = ?1 AND c.isActive = true")
     Client findByCin(int cin);
 }
 

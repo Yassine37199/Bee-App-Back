@@ -1,4 +1,4 @@
-package com.beeauto.Twilio;
+package com.beeauto.SMS_Twilio;
 
 import com.twilio.rest.api.v2010.account.Message;
 import com.twilio.rest.api.v2010.account.MessageCreator;
@@ -21,6 +21,7 @@ public class SmsController {
         this.twilioConfiguration = twilioConfiguration;
     }
 
+    // Envoyer un SMS
     @PostMapping("/send")
     public SmsRequest sendSms(@RequestBody SmsRequest smsRequest) {
         if(isPhoneNumberValid(smsRequest.getPhoneNumber())) {

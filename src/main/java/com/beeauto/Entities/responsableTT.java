@@ -3,7 +3,7 @@ package com.beeauto.entities;
 import javax.persistence.*;
 
 @Entity
-public class AgentTT {
+public class responsableTT {
 
     @Id
     @SequenceGenerator(
@@ -15,30 +15,30 @@ public class AgentTT {
             strategy = GenerationType.SEQUENCE,
             generator = "agentTT_sequence"
     )
-    private Long idAgentTT;
+    private Long idResponsable;
     private String name;
     private String email;
 
-    public AgentTT() {
+    public responsableTT() {
     }
 
-    public AgentTT(String name, String email) {
+    public responsableTT(String name, String email) {
         this.name = name;
         this.email = email;
     }
 
-    public AgentTT(Long idAgentTT, String name, String email) {
-        this.idAgentTT = idAgentTT;
+    public responsableTT(Long idAgentTT, String name, String email) {
+        this.idResponsable = idAgentTT;
         this.name = name;
         this.email = email;
     }
 
     public Long getIdAgentTT() {
-        return idAgentTT;
+        return idResponsable;
     }
 
     public void setIdAgentTT(Long idAgentTT) {
-        this.idAgentTT = idAgentTT;
+        this.idResponsable = idAgentTT;
     }
 
     public String getName() {

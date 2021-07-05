@@ -86,6 +86,7 @@ public class UserController {
 							.orElseThrow(() -> new ResourceNotFoundException("errreeeur"));
 					user.setNom(userRequest.getNom());
 					user.setPrenom(userRequest.getPrenom());
+					user.setEmail(userRequest.getEmail());
 					user.setPassword(userRequest.getPassword());
 					user.setTel(userRequest.getTel());
 					user.setActive(userRequest.getActive());

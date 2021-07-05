@@ -68,13 +68,13 @@ public class Region {
     @JoinColumn(name = "idAgentTT" , nullable = true)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @Nullable
-    private AgentTT agentTT;
+    private responsableTT responsableTT;
 
-    public AgentTT getAgentTT() {
-        return agentTT;
+    public responsableTT getResponsableTT() {
+        return responsableTT;
     }
 
-    public void setAgentTT(AgentTT agentTT) {
-        this.agentTT = agentTT;
+    public void setResponsableTT(responsableTT responsableTT) {
+        this.responsableTT = responsableTT;
     }
 }

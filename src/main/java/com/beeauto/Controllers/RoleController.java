@@ -65,6 +65,5 @@ public Role updateRole(
 			ResourceNotFoundException("RoleId" + roleId + "not found"));
 }
 
-
 }
 

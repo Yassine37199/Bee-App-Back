@@ -1,6 +1,5 @@
 package com.beeauto.repositories;
 
-import com.beeauto.entities.Agence;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import com.beeauto.entities.Offre;

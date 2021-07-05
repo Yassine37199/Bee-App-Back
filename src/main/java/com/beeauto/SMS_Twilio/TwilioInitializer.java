@@ -1,4 +1,4 @@
-package com.beeauto.Twilio;
+package com.beeauto.SMS_Twilio;
 
 import com.twilio.Twilio;
 import org.slf4j.Logger;
@@ -19,7 +19,7 @@ public class TwilioInitializer {
                 twilioConfig.getAccount_sid(),
                 twilioConfig.getAuthToken()
         );
-        LOGGER.info("Twilio initialized ... with account sid {}",twilioConfig.getAccount_sid());
+        LOGGER.info("SMS_Twilio initialized ... with account sid {}",twilioConfig.getAccount_sid());
 
     }
 

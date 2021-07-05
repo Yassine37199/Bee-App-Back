@@ -1,13 +1,12 @@
 package com.beeauto.repositories;
 
-import com.beeauto.entities.AgentTT;
-import com.beeauto.entities.Region;
+import com.beeauto.entities.responsableTT;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
-public interface AgentTTRepository extends JpaRepository<AgentTT, Long> {
+public interface AgentTTRepository extends JpaRepository<responsableTT, Long> {
 
-    @Query("SELECT a FROM AgentTT a " +
+    @Query("SELECT a FROM responsableTT a " +
             "WHERE a.email = ?1")
-    AgentTT findByEmail(String email);
+    responsableTT findByEmail(String email);
 }

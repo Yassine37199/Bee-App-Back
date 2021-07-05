@@ -1,4 +1,4 @@
-package com.beeauto.Twilio;
+package com.beeauto.SMS_Twilio;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;

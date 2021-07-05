@@ -18,7 +18,7 @@ public interface UserRepository extends CrudRepository<User, Long> {
     User findByEmail(String email);
 
     @Query("SELECT u FROM User u " +
-            "WHERE u.role.nomrole = ?1")
+            "WHERE u.role.nomrole = ?1 AND u.active = 'active'")
     List<User> findByRole(String nomrole);
 
 

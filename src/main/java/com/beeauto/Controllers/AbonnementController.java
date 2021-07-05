@@ -2,9 +2,6 @@ package com.beeauto.controllers;
 
 
 import com.beeauto.entities.Abonnement;
-import com.beeauto.entities.Agence;
-import com.beeauto.entities.Ticket;
-import com.beeauto.entities.User;
 import com.beeauto.exceptions.ResourceNotFoundException;
 import com.beeauto.repositories.AbonnementRepository;
 import com.beeauto.repositories.DemandeAbonnementRepository;
@@ -47,6 +44,9 @@ public class AbonnementController {
         return new ResponseEntity<>(abonnement , HttpStatus.OK);
     }
 
+
+    // Rechercher Des Abonnements
+
     @GetMapping("/cin/{cin}")
     public ResponseEntity<List<Abonnement>> getAbonnementByCIN(@PathVariable("cin") int cin){
         List<Abonnement> abonnements =  this.abonnementRepo.findByCIN(cin);
@@ -56,6 +56,12 @@ public class AbonnementController {
     @GetMapping("/reftt/{reftt}")
     public ResponseEntity<List<Abonnement>> getAbonnementByRefTT(@PathVariable("reftt") String reftt){
         List<Abonnement> abonnements =  this.abonnementRepo.findByRefTT(reftt);
+        return new ResponseEntity<>(abonnements , HttpStatus.OK);
+    }
+
+    @GetMapping("/tel/{telADSL}")
+    public ResponseEntity<List<Abonnement>> getAbonnementByTelADSL(@PathVariable("telADSL") int telADSl){
+        List<Abonnement> abonnements =  this.abonnementRepo.findByTelFixe(telADSl);
         return new ResponseEntity<>(abonnements , HttpStatus.OK);
     }
 
